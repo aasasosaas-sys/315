@@ -1,0 +1,715 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>古文単語315 暗記帳</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+/* Layout: one phone-width app column; indigo "night ink" brand, gold for progress, vertical mincho for headwords. Bottom tab bar, focus screens for study. */
+:root{
+  --paper:#f3f4ef; --card:#ffffff; --ink:#1d2333; --sub:#687086; --line:#e0e2da; --line2:#eceee8;
+  --ai:#25396d; --ai-2:#3b5394; --ai-soft:#e5e9f3; --on-ai:#ffffff; --hero:#25396d; --on-hero:#ffffff;
+  --gold:#d79a1c; --gold-soft:#f8ecd2;
+  --ok:#2f8653; --ok-soft:#e1f1e7; --ng:#c43d36; --ng-soft:#f8e3e1;
+  --shadow:0 1px 2px rgba(29,35,51,.06),0 6px 20px rgba(29,35,51,.06);
+  --f-disp:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;
+  --f-ui:"Zen Kaku Gothic New","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif;
+  --r:16px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#11141d; --card:#1a1f2d; --ink:#e9ebf1; --sub:#959cb0; --line:#2a3043; --line2:#222838;
+  --ai:#93a9ec; --ai-2:#b4c4f3; --ai-soft:#222b46; --on-ai:#11141d; --hero:#27386a; --on-hero:#f2f4fa;
+  --gold:#f0bd4c; --gold-soft:#3a3020;
+  --ok:#6cc48c; --ok-soft:#1c3527; --ng:#ef7c73; --ng-soft:#3e2221;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25); color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#11141d; --card:#1a1f2d; --ink:#e9ebf1; --sub:#959cb0; --line:#2a3043; --line2:#222838;
+  --ai:#93a9ec; --ai-2:#b4c4f3; --ai-soft:#222b46; --on-ai:#11141d; --hero:#27386a; --on-hero:#f2f4fa;
+  --gold:#f0bd4c; --gold-soft:#3a3020;
+  --ok:#6cc48c; --ok-soft:#1c3527; --ng:#ef7c73; --ng-soft:#3e2221;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25); color-scheme:dark;}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-ui);font-size:15px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--paper)}
+button{font:inherit;color:inherit}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--ai);outline-offset:2px}
+.app{max-width:560px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 calc(96px + env(safe-area-inset-bottom,0px))}
+.app.focus{padding-bottom:calc(24px + env(safe-area-inset-bottom,0px))}
+[hidden]{display:none!important}
+.disp{font-family:var(--f-disp)}
+.num{font-variant-numeric:tabular-nums}
+
+/* ---------- headers ---------- */
+.lh{padding:22px 2px 8px;display:flex;align-items:flex-end;gap:12px}
+.lh h1{font-family:var(--f-disp);font-weight:800;font-size:28px;line-height:1.2;margin:0;letter-spacing:.04em;text-wrap:balance}
+.lh .eyebrow{font-size:12px;color:var(--sub);letter-spacing:.12em}
+.lh .grow{flex:1;min-width:0}
+.fbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);display:flex;align-items:center;gap:12px;padding:12px 0}
+.iconbtn{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;cursor:pointer;flex:none}
+.iconbtn svg{width:20px;height:20px}
+.fbar .ft{flex:1;min-width:0;font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.track{height:8px;border-radius:99px;background:var(--line);overflow:hidden;flex:1}
+.track>i{display:block;height:100%;border-radius:99px;background:var(--ai);width:0;transition:width .3s ease}
+.track.gold>i{background:var(--gold)}
+.track.warn>i{background:var(--ng)}
+
+/* ---------- home ---------- */
+.hero{background:var(--hero);color:var(--on-hero);border-radius:22px;padding:20px;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;position:relative;overflow:hidden}
+.hero::after{content:"三百十五";position:absolute;right:-6px;top:-10px;writing-mode:vertical-rl;font-family:var(--f-disp);font-weight:800;font-size:64px;opacity:.09;letter-spacing:.05em;pointer-events:none}
+.ring{width:96px;height:96px;position:relative}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .rv{position:absolute;inset:0;display:grid;place-items:center;text-align:center;line-height:1.1}
+.ring .rv b{font-size:24px;font-weight:700}
+.ring .rv small{display:block;font-size:10px;opacity:.75;margin-top:2px}
+.hstats{display:grid;grid-template-columns:1fr 1fr;gap:10px;min-width:0}
+.hstat{background:color-mix(in srgb,var(--on-hero) 12%,transparent);border-radius:12px;padding:8px 10px}
+.hstat .k{font-size:11px;opacity:.8}
+.hstat .v{font-size:20px;font-weight:700}
+.hstat .v small{font-size:11px;font-weight:500;opacity:.8;margin-left:2px}
+.hstat.wide{grid-column:1/-1}
+.cont{margin-top:14px;width:100%;display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;cursor:pointer;text-align:left;box-shadow:var(--shadow)}
+.cont .ci{width:52px;height:52px;border-radius:50%;background:var(--gold);color:#3a2706;display:grid;place-items:center;flex:none}
+.cont .ci svg{width:24px;height:24px}
+.cont .ct{flex:1;min-width:0}
+.cont .ct .k{font-size:12px;color:var(--sub)}
+.cont .ct .v{font-family:var(--f-disp);font-size:19px;font-weight:700;line-height:1.35}
+.cont .ct .s{font-size:12px;color:var(--sub)}
+.sec-t{font-size:12px;color:var(--sub);letter-spacing:.14em;margin:24px 2px 8px}
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.mode{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 12px;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:10px;min-height:120px}
+.mode .mi{width:38px;height:38px;border-radius:11px;background:var(--ai-soft);color:var(--ai);display:grid;place-items:center}
+.mode .mi svg{width:20px;height:20px}
+.mode b{font-size:15px}
+.mode span{font-size:11.5px;color:var(--sub);line-height:1.5}
+@media (max-width:360px){.modes{grid-template-columns:1fr 1fr}}
+.wod{margin-top:10px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;gap:16px;align-items:stretch}
+.wod .vw{writing-mode:vertical-rl;font-family:var(--f-disp);font-weight:800;font-size:26px;letter-spacing:.08em;line-height:1.1;border-right:1px solid var(--line);padding-right:14px;flex:none}
+.wod .wm{flex:1;min-width:0;font-size:14px;line-height:1.75}
+.wod .wm .k{font-size:12px;color:var(--sub);margin-bottom:4px}
+
+/* ---------- tab bar ---------- */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:25;background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+.tabbar .in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+.tab{background:none;border:0;padding:9px 0 8px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;color:var(--sub);cursor:pointer}
+.tab svg{width:22px;height:22px}
+.tab.on{color:var(--ai);font-weight:700}
+
+/* ---------- step path ---------- */
+.rounds{display:flex;gap:6px;margin:4px 0 0}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:6px 14px;font-size:13px;cursor:pointer;white-space:nowrap}
+.chip.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.rnote{font-size:12.5px;color:var(--sub);margin:10px 2px 0;line-height:1.7}
+.unit{margin:22px 0 4px;background:var(--hero);color:var(--on-hero);border-radius:var(--r);padding:14px 16px;display:flex;align-items:center;gap:12px}
+.unit .ut{flex:1;min-width:0}
+.unit .ut .k{font-size:11px;opacity:.8;letter-spacing:.12em}
+.unit .ut .v{font-family:var(--f-disp);font-weight:700;font-size:19px}
+.unit .uc{font-size:13px;font-weight:700;background:color-mix(in srgb,var(--on-hero) 15%,transparent);border-radius:99px;padding:3px 10px}
+.path{position:relative;padding:8px 0}
+.node-row{display:flex;justify-content:center;padding:9px 0}
+.node{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:0;cursor:pointer;width:140px}
+.node .nb{width:68px;height:62px;border-radius:50%;display:grid;place-items:center;background:var(--line);color:var(--sub);box-shadow:0 6px 0 color-mix(in srgb,var(--line) 60%,var(--ink) 18%);transition:transform .12s}
+.node:active .nb{transform:translateY(4px);box-shadow:0 2px 0 color-mix(in srgb,var(--line) 60%,var(--ink) 18%)}
+.node .nb svg{width:28px;height:28px}
+.node.open .nb{background:var(--ai);color:var(--on-ai);box-shadow:0 6px 0 color-mix(in srgb,var(--ai) 60%,#000 40%)}
+.node.cleared .nb{background:var(--gold);color:#3a2706;box-shadow:0 6px 0 color-mix(in srgb,var(--gold) 65%,#000 35%)}
+.node.exam .nb{width:78px;height:70px;border-radius:24px}
+.node.locked{cursor:not-allowed}
+.node.locked .nl{opacity:.55}
+.node .nl{font-size:12.5px;font-weight:700;text-align:center;line-height:1.35}
+.node .nl small{display:block;font-weight:400;color:var(--sub);font-size:11px}
+.node.current .nb{animation:bob 1.8s ease-in-out infinite}
+.node .here{position:absolute;top:-30px;background:var(--card);border:2px solid var(--line);border-radius:10px;padding:2px 10px;font-size:12px;font-weight:700;color:var(--ai);white-space:nowrap}
+.node .here::after{content:"";position:absolute;left:50%;bottom:-7px;width:10px;height:10px;background:var(--card);border-right:2px solid var(--line);border-bottom:2px solid var(--line);transform:translateX(-50%) rotate(45deg)}
+.node .best{position:absolute;top:-4px;right:26px;background:var(--card);border:1px solid var(--line);border-radius:99px;font-size:10px;font-weight:700;padding:0 6px;color:var(--ok)}
+@keyframes bob{50%{transform:translateY(-4px)}}
+
+/* ---------- sheet ---------- */
+.scrim{position:fixed;inset:0;z-index:40;background:rgba(10,12,20,.45);display:flex;align-items:flex-end;justify-content:center;animation:fade .18s}
+.sheet{width:100%;max-width:560px;background:var(--card);border-radius:24px 24px 0 0;padding:10px 20px calc(20px + env(safe-area-inset-bottom,0px));padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));animation:up .24s cubic-bezier(.2,.8,.2,1)}
+.sheet .grab{width:40px;height:5px;border-radius:9px;background:var(--line);margin:0 auto 12px}
+.sheet .k{font-size:12px;color:var(--sub);letter-spacing:.1em}
+.sheet h2{font-family:var(--f-disp);font-size:24px;margin:2px 0 12px;font-weight:800}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.fact{background:var(--paper);border-radius:12px;padding:10px;text-align:center}
+.fact .v{font-size:19px;font-weight:700}
+.fact .k{font-size:11px;letter-spacing:0}
+@keyframes up{from{transform:translateY(40px);opacity:.5}}
+@keyframes fade{from{opacity:0}}
+
+/* ---------- buttons ---------- */
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border-radius:14px;padding:14px;font-size:16px;font-weight:700;border:1px solid var(--line);background:var(--card);cursor:pointer}
+.btn+.btn{margin-top:10px}
+.btn.pri{background:var(--ai);border-color:var(--ai);color:var(--on-ai);box-shadow:0 4px 0 color-mix(in srgb,var(--ai) 60%,#000 40%)}
+.btn.pri:active{transform:translateY(3px);box-shadow:0 1px 0 color-mix(in srgb,var(--ai) 60%,#000 40%)}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:#3a2706;box-shadow:0 4px 0 color-mix(in srgb,var(--gold) 65%,#000 35%)}
+.btn svg{width:20px;height:20px}
+.btnrow{display:flex;gap:10px}
+.btnrow .btn+.btn{margin-top:0}
+
+/* ---------- setup ---------- */
+.group{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:10px}
+.gtitle{font-size:12px;color:var(--sub);letter-spacing:.12em;margin:18px 4px 0}
+.presets{display:flex;gap:8px;overflow-x:auto;padding:12px;scrollbar-width:none}
+.presets::-webkit-scrollbar{display:none}
+.presets .chip{flex:none}
+.rangebox{display:flex;align-items:center;gap:10px;padding:0 14px 14px}
+.rangebox label{font-size:12px;color:var(--sub)}
+.rangebox input{width:84px;font:inherit;font-size:17px;font-weight:700;text-align:center;padding:8px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font-variant-numeric:tabular-nums}
+.sw{display:flex;align-items:center;gap:12px;padding:13px 14px;border-top:1px solid var(--line2);cursor:pointer}
+.group .sw:first-child{border-top:0}
+.sw .t{flex:1;min-width:0;font-size:15px}
+.sw .t small{display:block;font-size:12px;color:var(--sub)}
+.sw input{position:absolute;opacity:0;pointer-events:none}
+.sw .tg{width:46px;height:28px;border-radius:99px;background:var(--line);position:relative;flex:none;transition:background .15s}
+.sw .tg::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .18s}
+.sw input:checked+.tg{background:var(--ok)}
+.sw input:checked+.tg::after{transform:translateX(18px)}
+.sw input:focus-visible+.tg{outline:2px solid var(--ai);outline-offset:2px}
+.seg{display:flex;background:var(--paper);border-radius:10px;padding:3px;gap:2px}
+.seg button{flex:1;border:0;background:none;padding:7px 0;border-radius:8px;font-size:13px;cursor:pointer;color:var(--sub)}
+.seg button.on{background:var(--card);color:var(--ink);font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.segrow{padding:12px 14px;border-top:1px solid var(--line2)}
+.segrow .t{font-size:13px;color:var(--sub);margin-bottom:8px}
+.startbar{position:sticky;bottom:calc(64px + env(safe-area-inset-bottom,0px));margin-top:8px;z-index:10;padding:10px 0 12px;background:linear-gradient(to top,var(--paper) 70%,transparent)}
+.poolc{text-align:center;font-size:12.5px;color:var(--sub);margin:12px 0 8px}
+
+/* ---------- list ---------- */
+.search{position:sticky;top:env(safe-area-inset-top,0px);z-index:15;background:var(--paper);padding:8px 0 10px;display:flex;gap:8px}
+.search .sb{flex:1;min-width:0;display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0 12px}
+.search .sb svg{width:18px;height:18px;color:var(--sub);flex:none}
+.search input{flex:1;min-width:0;border:0;background:none;font:inherit;font-size:15px;color:var(--ink);padding:11px 0;outline:none}
+.togglebtn{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:0 12px;font-size:13px;cursor:pointer;white-space:nowrap}
+.togglebtn.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.lchap{font-family:var(--f-disp);font-weight:700;font-size:15px;color:var(--ai);margin:22px 4px 8px;display:flex;align-items:center;gap:10px}
+.lchap::after{content:"";flex:1;height:1px;background:var(--line)}
+.ent{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:8px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px}
+.ent .eno{grid-row:1/span 3;display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:4px}
+.ent .eno .n{font-size:12px;font-weight:700;color:var(--sub);font-variant-numeric:tabular-nums}
+.ent .eno .n.tagged{color:var(--ai)}
+.ent .chk{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--line);background:none;display:grid;place-items:center;cursor:pointer;color:transparent}
+.ent .chk svg{width:16px;height:16px}
+.ent.done .chk{background:var(--ok);border-color:var(--ok);color:#fff}
+.ent .eh{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;min-width:0}
+.ent .w{font-family:var(--f-disp);font-weight:800;font-size:21px;line-height:1.3}
+.ent .kj{font-size:13px;color:var(--sub)}
+.ent .pos{font-size:11px;color:var(--sub);background:var(--paper);border-radius:6px;padding:1px 7px}
+.ent .m{font-size:14.5px;line-height:1.75;min-width:0;overflow-wrap:anywhere}
+.ent .eh,.ent .m{grid-column:2}
+.ent .rel{grid-column:2;border-top:1px dashed var(--line);margin-top:6px;padding-top:6px;display:flex;flex-direction:column;gap:5px;min-width:0}
+.r{display:grid;grid-template-columns:auto minmax(0,max-content) minmax(0,1fr);gap:8px;align-items:baseline;font-size:13.5px;line-height:1.6}
+.r .rw{font-weight:700;font-family:var(--f-disp);font-size:15px;max-width:11em;overflow-wrap:anywhere}
+.r .rm{color:var(--ink);min-width:0}
+.tag{font-size:10.5px;font-weight:700;border-radius:5px;padding:0 5px;line-height:18px;flex:none}
+.tag.関{background:var(--ai-soft);color:var(--ai)}
+.tag.同{background:var(--ok-soft);color:var(--ok)}
+.tag.反{background:var(--ng-soft);color:var(--ng)}
+.tag.類{background:var(--gold-soft);color:color-mix(in srgb,var(--gold) 70%,var(--ink))}
+.hide-m .m,.hide-m .rm{color:transparent;background:var(--line2);border-radius:6px;cursor:pointer;user-select:none}
+.hide-m .m.show,.hide-m .rm.show{color:inherit;background:none}
+.empty{text-align:center;color:var(--sub);padding:48px 0;font-size:14px}
+
+/* ---------- flashcard ---------- */
+.stack{position:relative;height:min(62vh,460px);margin-top:8px;perspective:1200px}
+.fc{position:absolute;inset:0;cursor:grab;touch-action:pan-y;user-select:none}
+.fc .inner{position:absolute;inset:0;transition:transform .45s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
+.fc.flip .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;overflow:hidden}
+.face.back{transform:rotateY(180deg);justify-content:flex-start;align-items:stretch;overflow-y:auto}
+.face .meta{position:absolute;top:16px;left:18px;right:18px;display:flex;justify-content:space-between;font-size:12px;color:var(--sub)}
+.face .vw{writing-mode:vertical-rl;font-family:var(--f-disp);font-weight:800;font-size:44px;letter-spacing:.12em;line-height:1.15;max-height:78%}
+.face .hw{font-family:var(--f-disp);font-weight:800;font-size:30px;line-height:1.4;text-align:center;text-wrap:balance}
+.face .kj{margin-top:12px;font-size:14px;color:var(--sub)}
+.face .tap{position:absolute;bottom:16px;font-size:12px;color:var(--sub)}
+.face .bw{font-family:var(--f-disp);font-weight:800;font-size:22px;margin-top:22px}
+.face .bm{margin-top:12px;font-size:17px;line-height:1.9}
+.face .bm div+div{margin-top:4px}
+.stamp{position:absolute;top:28px;font-size:22px;font-weight:800;border:3px solid;border-radius:12px;padding:2px 12px;opacity:0;transform:rotate(-12deg);pointer-events:none}
+.stamp.ok{right:24px;color:var(--ok)}
+.stamp.ng{left:24px;color:var(--ng);transform:rotate(12deg)}
+.fc.ghost{transform:scale(.95) translateY(14px);opacity:.6;pointer-events:none}
+.swipehint{display:flex;justify-content:space-between;font-size:12px;color:var(--sub);margin:12px 4px 0}
+.cardbtns{display:flex;gap:12px;margin-top:12px}
+.cardbtns .btn{margin:0}
+.btn.ngb{color:var(--ng);border-color:color-mix(in srgb,var(--ng) 40%,var(--line))}
+.btn.okb{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 40%,var(--line))}
+
+/* ---------- quiz ---------- */
+.qtop{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--sub);margin-top:2px}
+.timer{font-variant-numeric:tabular-nums;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:5px}
+.timer svg{width:16px;height:16px}
+.timer.warn{color:var(--ng)}
+.qcard{margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px 18px;text-align:center;min-height:170px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.qcard .qm{font-size:12px;color:var(--sub)}
+.qcard .qw{font-family:var(--f-disp);font-weight:800;font-size:34px;line-height:1.35;margin-top:6px;text-wrap:balance}
+.qcard .qk{font-size:14px;color:var(--sub)}
+.combo{display:inline-block;margin-top:10px;font-size:12px;font-weight:700;color:var(--gold);background:var(--gold-soft);border-radius:99px;padding:2px 10px}
+.choices{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.choice{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start;text-align:left;font-size:15px;line-height:1.65;padding:13px 14px;border-radius:16px;border:1.5px solid var(--line);border-bottom-width:4px;background:var(--card);cursor:pointer;transition:transform .08s}
+.choice:active{transform:translateY(2px)}
+.choice .ck{width:28px;height:28px;border-radius:8px;border:1.5px solid var(--line);display:grid;place-items:center;font-size:12px;font-weight:700;color:var(--sub)}
+.choice.right{background:var(--ok-soft);border-color:var(--ok)}
+.choice.right .ck{background:var(--ok);border-color:var(--ok);color:#fff}
+.choice.wrong{background:var(--ng-soft);border-color:var(--ng);animation:shake .35s}
+.choice.wrong .ck{background:var(--ng);border-color:var(--ng);color:#fff}
+.choice.dim{opacity:.5}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* ---------- result ---------- */
+.res{text-align:center;padding:20px 0 6px;position:relative}
+.res .ring{width:160px;height:160px;margin:0 auto}
+.res .ring .rv b{font-size:40px}
+.res .ring .rv small{font-size:12px;color:var(--sub);opacity:1}
+.res h2{font-family:var(--f-disp);font-weight:800;font-size:26px;margin:14px 0 2px}
+.res p{color:var(--sub);font-size:13.5px;margin:0}
+.seal{position:absolute;top:10px;right:18px;width:78px;height:78px;border-radius:50%;border:3px solid var(--ng);color:var(--ng);display:grid;place-items:center;font-family:var(--f-disp);font-weight:800;font-size:20px;transform:rotate(-14deg);animation:stampin .45s cubic-bezier(.2,1.6,.4,1)}
+.seal.ok{border-color:var(--ok);color:var(--ok)}
+@keyframes stampin{from{transform:rotate(-14deg) scale(2.2);opacity:0}}
+.rstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0}
+.rstat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px;text-align:center}
+.rstat .v{font-size:20px;font-weight:700}
+.rstat .k{font-size:11px;color:var(--sub)}
+.miss{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:6px 14px;margin-top:16px}
+.miss .mt{font-size:12px;color:var(--sub);padding:8px 0 4px}
+.miss .r{grid-template-columns:minmax(0,max-content) minmax(0,1fr);padding:8px 0;border-top:1px solid var(--line2)}
+.toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:12px;font-size:13px;z-index:60;animation:up .2s}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="app" id="app"></div>
+<nav class="tabbar" id="tabbar"><div class="in">
+  <button class="tab" data-tab="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>ホーム</button>
+  <button class="tab" data-tab="step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4v-4h4v-4h4V8h4"/><circle cx="20" cy="4" r="1.5"/></svg>ステップ</button>
+  <button class="tab" data-tab="test"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6M9 4a2 2 0 0 0-2 2H5v15h14V6h-2a2 2 0 0 0-2-2M8.5 13l2.5 2.5 4.5-5"/></svg>テスト</button>
+  <button class="tab" data-tab="card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="14" height="15" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v13"/></svg>カード</button>
+  <button class="tab" data-tab="list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h2M4 12h2M4 19h2M10 5h10M10 12h10M10 19h10"/></svg>一覧</button>
+</div></nav>
+
+<script>
+const DATA = [{"id":"1","no":1,"t":"見","w":"みる","k":"見る","p":"動詞・マ行上一段","m":"①見る・会う ②思う・分かる ③（男女の）関係を結ぶ・結婚する・妻とする ④面倒を見る・世話をする","c":"第一章 最重要語（動詞）","g":"1"},{"id":"2","no":2,"t":"見","w":"みす","k":"見す","p":"動詞・サ行下二段","m":"①見せる・（様子を）見させる ②結婚させる","c":"第一章 最重要語（動詞）","g":"2"},{"id":"3","no":3,"t":"見","w":"みゆ","k":"見ゆ","p":"動詞・ヤ行下二段","m":"①見える・思われる ②見られる・見せる ③（女性が）結婚する","c":"第一章 最重要語（動詞）","g":"3"},{"id":"4","no":4,"t":"見","w":"かいまみる","k":"垣間見る","p":"動詞・マ行上一段","m":"①のぞき見る","c":"第一章 最重要語（動詞）","g":"4"},{"id":"4-1","t":"関","w":"かいまみ","k":"垣間見","p":"名詞","m":"のぞき見","c":"第一章 最重要語（動詞）","g":"4"},{"id":"5","no":5,"t":"見","w":"よばふ","k":"呼ばふ","p":"動詞・ハ行四段","m":"①呼び続ける ②求婚する・言い寄る","c":"第一章 最重要語（動詞）","g":"5"},{"id":"5-1","t":"関","w":"くどく","k":"口説く","p":"動詞","m":"①繰り返し同じことを言う ②意中を訴える・祈願する","c":"第一章 最重要語（動詞）","g":"5"},{"id":"6","no":6,"t":"見","w":"すく","k":"好く","p":"動詞・カ行四段","m":"①風流を好む・芸道に熱中する ②色ごとを好む・恋愛に熱中する","c":"第一章 最重要語（動詞）","g":"6"},{"id":"6-1","t":"関","w":"すき","k":"好き","p":"名詞","m":"①風流の道に熱中すること ②色好み・恋愛","c":"第一章 最重要語（動詞）","g":"6"},{"id":"6-2","t":"関","w":"すきずきし","k":"好き好きし","p":"形容詞","m":"①風流だ ②好色だ","c":"第一章 最重要語（動詞）","g":"6"},{"id":"7","no":7,"t":"見","w":"わたる","k":"渡る","p":"動詞・ラ行四段","m":"①行く・来る・通る〈移動を表す〉 ②〈主に「わたらせ給ふ」の形で〉いらっしゃる〈存在・状態を表す〉 ③〈動詞の連用形について〉〜続ける ④〈動詞の連用形について〉一面に（〜する）","c":"第一章 最重要語（動詞）","g":"7"},{"id":"7-1","t":"関","w":"わたす","k":"渡す","p":"他動詞","m":"移す","c":"第一章 最重要語（動詞）","g":"7"},{"id":"8","no":8,"t":"見","w":"ありく","k":"歩く","p":"動詞・カ行四段","m":"①歩き回る・動き回る・出歩く ②〈動詞の連用形について〉〜しまわる ③〈動詞の連用形について〉〜続ける","c":"第一章 最重要語（動詞）","g":"8"},{"id":"9","no":9,"t":"見","w":"おこなふ","k":"行ふ","p":"動詞・ハ行四段","m":"①仏道修行をする・勤行する","c":"第一章 最重要語（動詞）","g":"9"},{"id":"9-1","t":"関","w":"おこなひ","k":"行ひ","p":"名詞","m":"仏道修行","c":"第一章 最重要語（動詞）","g":"9"},{"id":"10","no":10,"t":"見","w":"なやむ","k":"悩む","p":"動詞・マ行四段","m":"①病気になる・病気で苦しむ","c":"第一章 最重要語（動詞）","g":"10"},{"id":"10-1","t":"関","w":"わづらふ","k":"煩ふ","p":"動詞","m":"苦しむ・〜しかねる","c":"第一章 最重要語（動詞）","g":"10"},{"id":"10-2","t":"関","w":"ここち","k":"心地","p":"名詞","m":"病気・気分（の悪さ）","c":"第一章 最重要語（動詞）","g":"10"},{"id":"10-3","t":"同","w":"いたはる","k":"","p":"動詞","m":"①病気で苦しむ ②苦労する・骨を折る","c":"第一章 最重要語（動詞）","g":"10"},{"id":"11","no":11,"t":"見","w":"おこたる","k":"怠る","p":"動詞・ラ行四段","m":"①病気が治る","c":"第一章 最重要語（動詞）","g":"11"},{"id":"11-1","t":"関","w":"おこたり","k":"怠り","p":"名詞","m":"（過失の）おわび・謝罪","c":"第一章 最重要語（動詞）","g":"11"},{"id":"12","no":12,"t":"見","w":"おくる","k":"後る・遅る","p":"動詞・ラ行下二段","m":"①先立たれる・死に後れる ②後になる・残される・劣る","c":"第一章 最重要語（動詞）","g":"12"},{"id":"13","no":13,"t":"見","w":"ながむ","k":"Ａ眺む／Ｂ詠む","p":"動詞・マ行下二段","m":"Ａ①もの思いに沈む・もの思いにふける・もの思いしながらぼんやり見る　Ｂ②（漢詩や和歌を）口ずさむ・（声に出して）歌う","c":"第一章 最重要語（動詞）","g":"13"},{"id":"14","no":14,"t":"見","w":"ときめく","k":"時めく","p":"動詞・カ行四段","m":"①寵愛を受ける・特別に愛される ②（時流に乗って・時宜を得て）栄える・もてはやされる","c":"第一章 最重要語（動詞）","g":"14"},{"id":"14-1","t":"関","w":"ときめかす","k":"","p":"他動詞","m":"寵愛する","c":"第一章 最重要語（動詞）","g":"14"},{"id":"15","no":15,"t":"見","w":"かしづく","k":"","p":"動詞・カ行四段","m":"①大切に育てる ②大切に世話をする","c":"第一章 最重要語（動詞）","g":"15"},{"id":"16","no":16,"t":"見","w":"めづ","k":"愛づ","p":"動詞・ダ行下二段","m":"①愛する・好む・かわいがる ②ほめる・たたえる・感嘆する","c":"第一章 最重要語（動詞）","g":"16"},{"id":"16-1","t":"関","w":"めづらし","k":"","p":"形容詞","m":"すばらしい","c":"第一章 最重要語（動詞）","g":"16"},{"id":"17","no":17,"t":"見","w":"おどろく","k":"驚く","p":"動詞・カ行四段","m":"①目を覚ます・起きる ②（はっと）気づく ③驚く〈現代語と同じ〉","c":"第一章 最重要語（動詞）","g":"17"},{"id":"17-1","t":"関","w":"おどろかす","k":"","p":"他動詞","m":"①起こす ②（はっと）気づかせる","c":"第一章 最重要語（動詞）","g":"17"},{"id":"18","no":18,"t":"見","w":"こうず","k":"困ず","p":"動詞・サ行変格","m":"①疲れる ②悩む・困る","c":"第一章 最重要語（動詞）","g":"18"},{"id":"19","no":19,"t":"見","w":"おぼゆ","k":"覚ゆ","p":"動詞・ヤ行下二段","m":"①思われる ②思い出す・思い出される ③似る・似ている","c":"第一章 最重要語（動詞）","g":"19"},{"id":"20","no":20,"t":"見","w":"きこゆ","k":"聞こゆ","p":"動詞・ヤ行下二段","m":"①聞こえる ②噂される・評判になる ③分かる","c":"第一章 最重要語（動詞）","g":"20"},{"id":"20-1","t":"関","w":"きこえ","k":"聞こえ","p":"名詞","m":"噂・評判","c":"第一章 最重要語（動詞）","g":"20"},{"id":"21","no":21,"t":"見","w":"まもる・まぼる","k":"守る","p":"動詞・ラ行四段","m":"①見つめる ②監視する","c":"第一章 最重要語（動詞）","g":"21"},{"id":"22","no":22,"t":"見","w":"たのむ","k":"頼む","p":"動詞・Ａマ行四段／Ｂマ行下二段","m":"Ａ①あてにする・頼りにする・期待する　Ｂ②あてにさせる・頼りにさせる・期待させる","c":"第一章 最重要語（動詞）","g":"22"},{"id":"22-1","t":"関","w":"たのみ","k":"頼み","p":"名詞","m":"あてにすること・期待","c":"第一章 最重要語（動詞）","g":"22"},{"id":"22-2","t":"関","w":"たのめ","k":"頼め","p":"名詞","m":"あてにさせること","c":"第一章 最重要語（動詞）","g":"22"},{"id":"22-3","t":"関","w":"たのもし","k":"頼もし","p":"形容詞","m":"①頼みになる ②裕福だ・豊かだ","c":"第一章 最重要語（動詞）","g":"22"},{"id":"23","no":23,"t":"見","w":"かづく","k":"被く","p":"動詞・Ａカ行四段／Ｂカ行下二段","m":"Ａ①かぶる ②（貴人からほうびとして）いただく　Ｂ③かぶせる ④（貴人がほうびとして）与える","c":"第一章 最重要語（動詞）","g":"23"},{"id":"23-1","t":"関","w":"かづく","k":"潜く","p":"動詞","m":"潜る","c":"第一章 最重要語（動詞）","g":"23"},{"id":"24","no":24,"t":"見","w":"ののしる","k":"","p":"動詞・ラ行四段","m":"①大声を出す・大声で騒ぐ ②評判になる・噂になる ③勢いが盛んである・羽振りをきかす","c":"第一章 最重要語（動詞）","g":"24"},{"id":"24-1","t":"関","w":"らうがはし","k":"","p":"形容詞","m":"①騒がしい ②乱雑だ・乱れている","c":"第一章 最重要語（動詞）","g":"24"},{"id":"25","no":25,"t":"見","w":"やる","k":"遣る","p":"動詞・ラ行四段","m":"①（人を）行かせる・（物を）送る ②〈動詞＋「やらず」の形で〉〜きれない・最後まで（〜し）ない","c":"第一章 最重要語（動詞）","g":"25"},{"id":"25-1","t":"反","w":"おこす","k":"","p":"動詞","m":"よこす","c":"第一章 最重要語（動詞）","g":"25"},{"id":"25-2","t":"関","w":"やる","k":"破る","p":"動詞","m":"破る","c":"第一章 最重要語（動詞）","g":"25"},{"id":"26","no":26,"t":"見","w":"いらふ","k":"答ふ","p":"動詞・ハ行下二段","m":"①答える","c":"第一章 最重要語（動詞）","g":"26"},{"id":"26-1","t":"関","w":"いらへ・さしいらへ","k":"","p":"名詞","m":"返事・返答","c":"第一章 最重要語（動詞）","g":"26"},{"id":"27","no":27,"t":"見","w":"あきらむ","k":"明らむ","p":"動詞・マ行下二段","m":"①明らかにする・はっきりさせる","c":"第一章 最重要語（動詞）","g":"27"},{"id":"27-1","t":"関","w":"あかし","k":"明かし","p":"形容詞","m":"明るい","c":"第一章 最重要語（動詞）","g":"27"},{"id":"28","no":28,"t":"見","w":"にほふ","k":"匂ふ","p":"動詞・ハ行四段","m":"①美しく映える・美しく輝く ②香りがする〈現代語と同じ〉","c":"第一章 最重要語（動詞）","g":"28"},{"id":"28-1","t":"関","w":"にほひ","k":"匂ひ","p":"名詞","m":"①美しい色つや ②香り","c":"第一章 最重要語（動詞）","g":"28"},{"id":"29","no":29,"t":"見","w":"ねんず","k":"念ず","p":"動詞・サ行変格","m":"①我慢する ②（心の中で）祈る〈現代語と同じ〉","c":"第一章 最重要語（動詞）","g":"29"},{"id":"30","no":30,"t":"見","w":"まうく","k":"設く","p":"動詞・カ行下二段","m":"①準備する・用意する","c":"第一章 最重要語（動詞）","g":"30"},{"id":"30-1","t":"関","w":"まうけ","k":"","p":"名詞","m":"①準備・用意 ②ごちそう・もてなし","c":"第一章 最重要語（動詞）","g":"30"},{"id":"30-2","t":"関","w":"こころまうけ","k":"心まうけ","p":"名詞","m":"心積もり（心の用意）","c":"第一章 最重要語（動詞）","g":"30"},{"id":"30-3","t":"関","w":"まうけのきみ","k":"まうけの君","p":"名詞","m":"皇太子","c":"第一章 最重要語（動詞）","g":"30"},{"id":"31","no":31,"t":"見","w":"ゐる","k":"Ａ居る／Ｂ率る","p":"動詞・ワ行上一段","m":"Ａ①座る ②じっとしている・（人が）留まる・（鳥が）とまる ③〈動詞の連用形について〉〜ている　Ｂ④連れる・伴う","c":"第一章 最重要語（動詞）","g":"31"},{"id":"32","no":32,"t":"見","w":"ぐす","k":"具す","p":"動詞・サ行変格","m":"①伴う・連れる・添える","c":"第一章 最重要語（動詞）","g":"32"},{"id":"32-1","t":"関","w":"たぐふ","k":"","p":"動詞","m":"①〈四段〉添う・伴う ②〈下二段〉添わせる・伴わせる・比べる","c":"第一章 最重要語（動詞）","g":"32"},{"id":"33","no":33,"t":"見","w":"ふ","k":"経","p":"動詞・ハ行下二段","m":"①（時間が）たつ〈経過する〉 ②（場所を）通る〈経由する〉","c":"第一章 最重要語（動詞）","g":"33"},{"id":"34","no":34,"t":"見","w":"さる","k":"Ａ避る／Ｂ去る","p":"動詞・ラ行四段","m":"Ａ①避ける　Ｂ②（時節が）来る・（その時に）なる ③立ち去る・過ぎ去る〈現代語と同じ〉","c":"第一章 最重要語（動詞）","g":"34"},{"id":"34-1","t":"関","w":"さる","k":"然る","p":"連体詞","m":"しかるべき・立派な","c":"第一章 最重要語（動詞）","g":"34"},{"id":"35","no":35,"t":"見","w":"ものす","k":"物す","p":"動詞・サ行変格","m":"①（ものごとを）する ②〈「ものし給ふ」の形で〉いらっしゃる","c":"第一章 最重要語（動詞）","g":"35"},{"id":"35-1","t":"関","w":"ものし","k":"","p":"形容詞","m":"不快だ・見苦しい","c":"第一章 最重要語（動詞）","g":"35"},{"id":"35-2","t":"関","w":"あり","k":"","p":"動詞","m":"①ある・いる ②（ものごとを）する","c":"第一章 最重要語（動詞）","g":"35"},{"id":"36","no":36,"t":"見","w":"ならふ","k":"慣らふ・馴らふ","p":"動詞・ハ行四段","m":"①慣れる ②親しくなる・なじむ","c":"第一章 最重要語（動詞）","g":"36"},{"id":"36-1","t":"関","w":"ならひ","k":"慣らひ","p":"名詞","m":"習慣・ならわし","c":"第一章 最重要語（動詞）","g":"36"},{"id":"37","no":37,"t":"見","w":"しのぶ","k":"Ａ忍ぶ／Ｂ偲ぶ","p":"動詞・バ行上二段・四段","m":"Ａ①我慢する・こらえる〈耐え忍ぶ〉 ②人目につかないようにする〈人目を忍ぶ〉　Ｂ③思い出す・恋い慕う〈過去・人を偲ぶ〉","c":"第一章 最重要語（動詞）","g":"37"},{"id":"38","no":38,"t":"見","w":"わぶ","k":"侘ぶ","p":"動詞・バ行上二段","m":"①困る・嘆く・つらく思う ②〈動詞の連用形について〉〜かねる・〜することができない","c":"第一章 最重要語（動詞）","g":"38"},{"id":"言1","t":"言","w":"やつす","k":"","p":"言い換え（出家する）","m":"出家する〈衣服などを変える〉","c":"言い換えコーナー（出家する・死ぬ）","g":"言1"},{"id":"言2","t":"言","w":"かたち（さま・すがた）をかふ","k":"かたち（様・姿）を変ふ","p":"言い換え（出家する）","m":"出家する〈衣服などを変える〉","c":"言い換えコーナー（出家する・死ぬ）","g":"言2"},{"id":"言3","t":"言","w":"みぐし（かしら・かざり）おろす","k":"御髪（頭・飾り）下ろす","p":"言い換え（出家する）","m":"出家する〈髪を切ったり、剃ったりする〉","c":"言い換えコーナー（出家する・死ぬ）","g":"言3"},{"id":"言4","t":"言","w":"もとどりきる","k":"もとどり切る","p":"言い換え（出家する）","m":"出家する〈髪を切ったり、剃ったりする〉","c":"言い換えコーナー（出家する・死ぬ）","g":"言4"},{"id":"言5","t":"言","w":"よをそむく（のがる・かる・いとふ・いづ・すつ）","k":"世を背く（遁る・離る・厭ふ・出づ・捨つ）","p":"言い換え（出家する）","m":"出家する〈世（＝俗世）を離れる〉","c":"言い換えコーナー（出家する・死ぬ）","g":"言5"},{"id":"言6","t":"言","w":"うす","k":"失す","p":"言い換え（死ぬ）","m":"死ぬ・亡くなる","c":"言い換えコーナー（出家する・死ぬ）","g":"言6"},{"id":"言7","t":"言","w":"みまかる","k":"身罷る","p":"言い換え（死ぬ）","m":"死ぬ・亡くなる","c":"言い換えコーナー（出家する・死ぬ）","g":"言7"},{"id":"言8","t":"言","w":"かくる","k":"隠る","p":"言い換え（死ぬ）","m":"死ぬ・亡くなる〈高貴な人物の死に際して多く使われる〉","c":"言い換えコーナー（出家する・死ぬ）","g":"言8"},{"id":"言9","t":"言","w":"きゆ","k":"消ゆ","p":"言い換え（死ぬ）","m":"死ぬ・亡くなる","c":"言い換えコーナー（出家する・死ぬ）","g":"言9"},{"id":"言10","t":"言","w":"たゆ","k":"絶ゆ","p":"言い換え（死ぬ）","m":"死ぬ・亡くなる","c":"言い換えコーナー（出家する・死ぬ）","g":"言10"},{"id":"言11","t":"言","w":"きえいる","k":"消え入る","p":"言い換え（死ぬ）","m":"死ぬ・気絶する","c":"言い換えコーナー（出家する・死ぬ）","g":"言11"},{"id":"言12","t":"言","w":"たえいる","k":"絶え入る","p":"言い換え（死ぬ）","m":"死ぬ・気絶する","c":"言い換えコーナー（出家する・死ぬ）","g":"言12"},{"id":"言13","t":"言","w":"いたづらになる","k":"","p":"言い換え（死ぬ）","m":"死ぬ・亡くなる","c":"言い換えコーナー（出家する・死ぬ）","g":"言13"},{"id":"言14","t":"言","w":"はかなくなる","k":"","p":"言い換え（死ぬ）","m":"死ぬ・亡くなる","c":"言い換えコーナー（出家する・死ぬ）","g":"言14"},{"id":"言15","t":"言","w":"むなしくなる","k":"","p":"言い換え（死ぬ）","m":"死ぬ・亡くなる","c":"言い換えコーナー（出家する・死ぬ）","g":"言15"},{"id":"言16","t":"言","w":"あさましくなる","k":"","p":"言い換え（死ぬ）","m":"死ぬ・亡くなる","c":"言い換えコーナー（出家する・死ぬ）","g":"言16"},{"id":"言17","t":"言","w":"いかにもなる","k":"","p":"言い換え（死ぬ）","m":"死ぬ〈「どのようにもなる」の意から〉","c":"言い換えコーナー（出家する・死ぬ）","g":"言17"},{"id":"言18","t":"言","w":"ともかくもなる","k":"","p":"言い換え（死ぬ）","m":"死ぬ","c":"言い換えコーナー（出家する・死ぬ）","g":"言18"},{"id":"言19","t":"言","w":"いふかひなくなる","k":"","p":"言い換え（死ぬ）","m":"死ぬ・亡くなる","c":"言い換えコーナー（出家する・死ぬ）","g":"言19"},{"id":"39","no":39,"t":"見","w":"をかし","k":"","p":"形容詞・シク活用","m":"①すばらしい〈美しい・かわいい・おもしろい・風流だなど肯定的に評価する様子や心情を表す〉 ②おかしい・滑稽だ","c":"第一章 最重要語（形容詞）","g":"39"},{"id":"39-1","t":"関","w":"おもしろし","k":"","p":"形容詞","m":"すばらしい・楽しい・風流だ","c":"第一章 最重要語（形容詞）","g":"39"},{"id":"39-2","t":"関","w":"たのし","k":"","p":"形容詞","m":"裕福だ","c":"第一章 最重要語（形容詞）","g":"39"},{"id":"40","no":40,"t":"見","w":"よろし","k":"","p":"形容詞・シク活用","m":"①悪くはない・まあよい ②普通だ","c":"第一章 最重要語（形容詞）","g":"40"},{"id":"40-1","t":"関","w":"よし","k":"","p":"形容詞","m":"①身分が高い・教養がある ②よい","c":"第一章 最重要語（形容詞）","g":"40"},{"id":"40-2","t":"関","w":"あし","k":"","p":"形容詞","m":"悪い","c":"第一章 最重要語（形容詞）","g":"40"},{"id":"40-3","t":"反","w":"わろし","k":"","p":"形容詞","m":"よくはない","c":"第一章 最重要語（形容詞）","g":"40"},{"id":"41","no":41,"t":"見","w":"ありがたし","k":"","p":"形容詞・ク活用","m":"①めったにない・珍しい ②（めったにないほど）すばらしい","c":"第一章 最重要語（形容詞）","g":"41"},{"id":"42","no":42,"t":"見","w":"つきづきし","k":"付き付きし","p":"形容詞・シク活用","m":"①似つかわしい・ふさわしい","c":"第一章 最重要語（形容詞）","g":"42"},{"id":"42-1","t":"反","w":"つきなし","k":"","p":"形容詞","m":"ふさわしくない・似つかわしくない","c":"第一章 最重要語（形容詞）","g":"42"},{"id":"43","no":43,"t":"見","w":"なまめかし","k":"","p":"形容詞・シク活用","m":"①優美だ・上品だ ②若々しい・みずみずしい","c":"第一章 最重要語（形容詞）","g":"43"},{"id":"43-1","t":"関","w":"なまめく","k":"","p":"動詞","m":"①落ち着いて上品だ ②若くみずみずしい","c":"第一章 最重要語（形容詞）","g":"43"},{"id":"44","no":44,"t":"見","w":"めでたし","k":"","p":"形容詞・ク活用","m":"①すばらしい","c":"第一章 最重要語（形容詞）","g":"44"},{"id":"45","no":45,"t":"見","w":"うるはし","k":"麗し","p":"形容詞・シク活用","m":"①きちんとしている・整っている・端正だ ②立派だ・美しい・見事だ","c":"第一章 最重要語（形容詞）","g":"45"},{"id":"46","no":46,"t":"見","w":"やむごとなし","k":"止む事無し","p":"形容詞・ク活用","m":"①高貴だ・尊い ②格別だ・並々でない・優れている ※「やんごとなし」「やごとなし」となっても同じ","c":"第一章 最重要語（形容詞）","g":"46"},{"id":"47","no":47,"t":"見","w":"おとなし","k":"大人し","p":"形容詞・シク活用","m":"①大人らしい・大人びている・ませている ②思慮分別がある・落ち着いている ③主だっている・年配で中心的な立場の者である","c":"第一章 最重要語（形容詞）","g":"47"},{"id":"48","no":48,"t":"見","w":"ゆかし","k":"","p":"形容詞・シク活用","m":"①見たい・聞きたい・知りたい ②心ひかれる・慕わしい","c":"第一章 最重要語（形容詞）","g":"48"},{"id":"49","no":49,"t":"見","w":"なつかし","k":"","p":"形容詞・シク活用","m":"①親しみ深い・心ひかれる・好ましい","c":"第一章 最重要語（形容詞）","g":"49"},{"id":"50","no":50,"t":"見","w":"はづかし","k":"恥づかし","p":"形容詞・シク活用","m":"①恥ずかしい・きまりが悪い〈現代語と同じ〉 ②（こちらが恥ずかしくなるほど相手が）立派だ","c":"第一章 最重要語（形容詞）","g":"50"},{"id":"51","no":51,"t":"見","w":"こころにくし","k":"心憎し","p":"形容詞・ク活用","m":"①奥ゆかしい・上品だ・心ひかれる","c":"第一章 最重要語（形容詞）","g":"51"},{"id":"51-1","t":"関","w":"にくし","k":"","p":"形容詞","m":"気にくわない・いやだ","c":"第一章 最重要語（形容詞）","g":"51"},{"id":"52","no":52,"t":"見","w":"うつくし","k":"美し","p":"形容詞・シク活用","m":"①かわいい・いとしい ②美しい〈現代語と同じ〉","c":"第一章 最重要語（形容詞）","g":"52"},{"id":"53","no":53,"t":"見","w":"かなし","k":"愛し","p":"形容詞・シク活用","m":"①いとしい・かわいい ②悲しい〈現代語と同じ〉","c":"第一章 最重要語（形容詞）","g":"53"},{"id":"53-1","t":"関","w":"かなしうす","k":"","p":"動詞","m":"かわいがる","c":"第一章 最重要語（形容詞）","g":"53"},{"id":"54","no":54,"t":"見","w":"らうたし","k":"","p":"形容詞・ク活用","m":"①かわいい・いじらしい","c":"第一章 最重要語（形容詞）","g":"54"},{"id":"54-1","t":"関","w":"らうたげなり","k":"","p":"形容動詞","m":"かわいい様子だ・かわいらしい","c":"第一章 最重要語（形容詞）","g":"54"},{"id":"55","no":55,"t":"見","w":"めやすし","k":"目安し","p":"形容詞・ク活用","m":"①（見た目の）感じがよい・見苦しくない","c":"第一章 最重要語（形容詞）","g":"55"},{"id":"56","no":56,"t":"見","w":"あやし","k":"Ａ怪し／Ｂ賤し","p":"形容詞・シク活用","m":"Ａ①不思議だ・変だ・妙だ　Ｂ②身分が低い・卑しい ③粗末だ・みすぼらしい","c":"第一章 最重要語（形容詞）","g":"56"},{"id":"56-1","t":"同","w":"いやし","k":"","p":"形容詞","m":"①身分が低い ②みすぼらしい","c":"第一章 最重要語（形容詞）","g":"56"},{"id":"57","no":57,"t":"見","w":"さうざうし","k":"","p":"形容詞・シク活用","m":"①もの足りない・さびしい","c":"第一章 最重要語（形容詞）","g":"57"},{"id":"58","no":58,"t":"見","w":"つれなし","k":"","p":"形容詞・ク活用","m":"①平然としている・平気だ ②冷淡だ・薄情だ","c":"第一章 最重要語（形容詞）","g":"58"},{"id":"59","no":59,"t":"見","w":"なめし","k":"","p":"形容詞・ク活用","m":"①無礼だ","c":"第一章 最重要語（形容詞）","g":"59"},{"id":"60","no":60,"t":"見","w":"おどろおどろし","k":"","p":"形容詞・シク活用","m":"①大げさだ・仰々しい ②気味が悪い・恐ろしい","c":"第一章 最重要語（形容詞）","g":"60"},{"id":"60-1","t":"同","w":"ことごとし","k":"","p":"形容詞","m":"大げさだ","c":"第一章 最重要語（形容詞）","g":"60"},{"id":"60-2","t":"同","w":"むくつけし","k":"","p":"形容詞","m":"気味が悪い・恐ろしい・無骨だ","c":"第一章 最重要語（形容詞）","g":"60"},{"id":"61","no":61,"t":"見","w":"うし","k":"憂し","p":"形容詞・ク活用","m":"①つらい・いやだ・情けない","c":"第一章 最重要語（形容詞）","g":"61"},{"id":"61-1","t":"同","w":"こころうし","k":"心憂し","p":"形容詞","m":"つらい・いやだ・情けない","c":"第一章 最重要語（形容詞）","g":"61"},{"id":"62","no":62,"t":"見","w":"むつかし","k":"","p":"形容詞・シク活用","m":"①不快だ・煩わしい・うっとうしい ②気味が悪い・恐ろしい","c":"第一章 最重要語（形容詞）","g":"62"},{"id":"62-1","t":"関","w":"むつかる","k":"","p":"動詞","m":"不愉快に思う","c":"第一章 最重要語（形容詞）","g":"62"},{"id":"63","no":63,"t":"見","w":"すさまじ","k":"","p":"形容詞・シク活用","m":"①興ざめだ・おもしろくない・しらけている ②殺風景だ・寒々としている・荒涼としている","c":"第一章 最重要語（形容詞）","g":"63"},{"id":"64","no":64,"t":"見","w":"びんなし","k":"便無し","p":"形容詞・ク活用","m":"①不都合だ・具合が悪い ②気の毒だ・いたわしい〈鎌倉時代以降〉","c":"第一章 最重要語（形容詞）","g":"64"},{"id":"64-1","t":"同","w":"ふびんなり","k":"不便なり","p":"形容動詞","m":"①不都合だ ②気の毒だ","c":"第一章 最重要語（形容詞）","g":"64"},{"id":"65","no":65,"t":"見","w":"いとほし","k":"","p":"形容詞・シク活用","m":"①気の毒だ・かわいそうだ ②いとしい・かわいい","c":"第一章 最重要語（形容詞）","g":"65"},{"id":"66","no":66,"t":"見","w":"いはけなし","k":"","p":"形容詞・ク活用","m":"①幼い・あどけない・子どもっぽい","c":"第一章 最重要語（形容詞）","g":"66"},{"id":"66-1","t":"同","w":"いとけなし","k":"","p":"形容詞","m":"幼い","c":"第一章 最重要語（形容詞）","g":"66"},{"id":"67","no":67,"t":"見","w":"つらし","k":"辛し","p":"形容詞・ク活用","m":"①薄情だ・冷淡だ ②つらい〈現代語と同じ〉","c":"第一章 最重要語（形容詞）","g":"67"},{"id":"68","no":68,"t":"見","w":"ところせし","k":"所狭し","p":"形容詞・ク活用","m":"①（物理的に）窮屈だ・（窮屈なほどその場に）あふれている ②（心理的に）窮屈だ・気詰まりだ ③仰々しい・大げさだ","c":"第一章 最重要語（形容詞）","g":"68"},{"id":"69","no":69,"t":"見","w":"うしろめた（な）し","k":"","p":"形容詞・ク活用","m":"①気がかりだ","c":"第一章 最重要語（形容詞）","g":"69"},{"id":"69-1","t":"反","w":"うしろやすし","k":"","p":"形容詞","m":"安心だ","c":"第一章 最重要語（形容詞）","g":"69"},{"id":"70","no":70,"t":"見","w":"かたはらいたし","k":"","p":"形容詞・ク活用","m":"①きまり悪い・恥ずかしい ②苦々しい・腹立たしい・見苦しい・聞き苦しい・みっともない ③気の毒だ・心苦しい","c":"第一章 最重要語（形容詞）","g":"70"},{"id":"71","no":71,"t":"見","w":"わりなし","k":"","p":"形容詞・ク活用","m":"①道理に合わない・ひどい・無理やりだ ②しかたがない・どうしようもない ③苦しい・つらい・困っている","c":"第一章 最重要語（形容詞）","g":"71"},{"id":"71-1","t":"関","w":"ことわり","k":"理","p":"名詞","m":"道理","c":"第一章 最重要語（形容詞）","g":"71"},{"id":"72","no":72,"t":"見","w":"ほいなし","k":"本意なし","p":"形容詞・ク活用","m":"①不本意だ・残念だ","c":"第一章 最重要語（形容詞）","g":"72"},{"id":"72-1","t":"関","w":"うらなし","k":"心なし","p":"形容詞","m":"①（心の内を）包み隠すことがない ②特に深い考えもない","c":"第一章 最重要語（形容詞）","g":"72"},{"id":"73","no":73,"t":"見","w":"あさまし","k":"","p":"形容詞・シク活用","m":"①驚くほどだ ②あきれるほどだ ③情けない・嘆かわしい","c":"第一章 最重要語（形容詞）","g":"73"},{"id":"73-1","t":"関","w":"あきる","k":"呆る","p":"動詞","m":"途方に暮れる・呆然とする","c":"第一章 最重要語（形容詞）","g":"73"},{"id":"73-2","t":"関","w":"あさむ","k":"","p":"動詞","m":"驚く・あきれる","c":"第一章 最重要語（形容詞）","g":"73"},{"id":"74","no":74,"t":"見","w":"めざまし","k":"目覚まし","p":"形容詞・シク活用","m":"①気にくわない・目障りだ ②すばらしい・立派だ","c":"第一章 最重要語（形容詞）","g":"74"},{"id":"75","no":75,"t":"見","w":"いみじ","k":"","p":"形容詞・シク活用","m":"①とてもよい・すばらしい ②とても悪い・ひどい ③〈「いみじく（う）」の形で副詞的に用いて〉とても・はなはだしく","c":"第一章 最重要語（形容詞）","g":"75"},{"id":"76","no":76,"t":"見","w":"ゆゆし","k":"","p":"形容詞・シク活用","m":"①不吉だ・縁起が悪い・恐ろしい ②とてもよい・すばらしい・立派だ ③〈「ゆゆしく（う）」の形で副詞的に用いて〉とても・はなはだしく","c":"第一章 最重要語（形容詞）","g":"76"},{"id":"76-1","t":"同","w":"いまいまし","k":"忌ま忌まし","p":"形容詞","m":"不吉だ・縁起が悪い","c":"第一章 最重要語（形容詞）","g":"76"},{"id":"77","no":77,"t":"見","w":"やさし","k":"恥し・優し","p":"形容詞・シク活用","m":"①恥ずかしい・きまり悪い ②優美だ・上品だ・風流だ ③けなげだ・殊勝だ・感心だ","c":"第一章 最重要語（形容詞）","g":"77"},{"id":"78","no":78,"t":"見","w":"しるし","k":"著し","p":"形容詞・ク活用","m":"①はっきりと分かる・はっきりしている ②〈「〜もしるく」の形で〉〜（の）とおりに","c":"第一章 最重要語（形容詞）","g":"78"},{"id":"79","no":79,"t":"見","w":"とし","k":"疾し","p":"形容詞・ク活用","m":"①早い・速い","c":"第一章 最重要語（形容詞）","g":"79"},{"id":"80","no":80,"t":"見","w":"ゆくりなし","k":"","p":"形容詞・ク活用","m":"①突然だ・思いがけない","c":"第一章 最重要語（形容詞）","g":"80"},{"id":"81","no":81,"t":"見","w":"おぼつかなし","k":"覚束無し","p":"形容詞・ク活用","m":"①はっきりしない ②気がかりだ・不安だ ③待ち遠しい・じれったい","c":"第一章 最重要語（形容詞）","g":"81"},{"id":"82","no":82,"t":"見","w":"こころもとなし","k":"心許無し","p":"形容詞・ク活用","m":"①はっきりしない・かすかだ ②気がかりだ・不安だ ③待ち遠しい・じれったい","c":"第一章 最重要語（形容詞）","g":"82"},{"id":"83","no":83,"t":"見","w":"あはれなり","k":"","p":"形容動詞","m":"①しみじみと心に深く感じられる〈趣深さ・悲しさ・いとしさなど心にしみるさまざまな様子や心情を表す〉","c":"第一章 最重要語（形容動詞）","g":"83"},{"id":"83-1","t":"関","w":"あはれ","k":"","p":"感動詞","m":"ああ","c":"第一章 最重要語（形容動詞）","g":"83"},{"id":"83-2","t":"関","w":"あはれがる","k":"","p":"動詞","m":"心に深く感じる","c":"第一章 最重要語（形容動詞）","g":"83"},{"id":"83-3","t":"関","w":"あはれむ","k":"","p":"動詞","m":"心に深く感じる","c":"第一章 最重要語（形容動詞）","g":"83"},{"id":"84","no":84,"t":"見","w":"つれづれなり","k":"徒然なり","p":"形容動詞","m":"①（することもなく）退屈である・所在ない ②（しんみりと）ものさびしい","c":"第一章 最重要語（形容動詞）","g":"84"},{"id":"85","no":85,"t":"見","w":"すずろなり・そぞろなり","k":"漫ろなり","p":"形容動詞","m":"①なんということ（わけ）もない ②思いがけない ③むやみやたらだ","c":"第一章 最重要語（形容動詞）","g":"85"},{"id":"86","no":86,"t":"見","w":"まめなり・まめやかなり","k":"実なり・忠実なり／実やかなり・忠実やかなり","p":"形容動詞","m":"①まじめである・誠実である ②実用的である","c":"第一章 最重要語（形容動詞）","g":"86"},{"id":"86-1","t":"同","w":"まめまめし","k":"","p":"形容詞","m":"①まじめだ ②実用的だ","c":"第一章 最重要語（形容動詞）","g":"86"},{"id":"87","no":87,"t":"見","w":"あだなり","k":"徒なり","p":"形容動詞","m":"①はかない・頼りにならない・もろい ②誠実さがない・浮ついている・浮気だ","c":"第一章 最重要語（形容動詞）","g":"87"},{"id":"87-1","t":"同","w":"あだあだし","k":"","p":"形容詞","m":"不誠実だ・浮気だ","c":"第一章 最重要語（形容動詞）","g":"87"},{"id":"88","no":88,"t":"見","w":"いたづらなり","k":"徒らなり","p":"形容動詞","m":"①役に立たない・むだだ・かいがない ②むなしい・はかない","c":"第一章 最重要語（形容動詞）","g":"88"},{"id":"88-1","t":"同","w":"やくなし","k":"益なし","p":"形容詞","m":"かいがない・むだだ","c":"第一章 最重要語（形容動詞）","g":"88"},{"id":"89","no":89,"t":"見","w":"いうなり","k":"優なり","p":"形容動詞","m":"①優れている・すばらしく立派だ ②上品で美しい・優雅である","c":"第一章 最重要語（形容動詞）","g":"89"},{"id":"90","no":90,"t":"見","w":"あてなり","k":"貴なり","p":"形容動詞","m":"①高貴である・身分が高い ②気品がある・上品である","c":"第一章 最重要語（形容動詞）","g":"90"},{"id":"90-1","t":"同","w":"あてやかなり","k":"","p":"形容動詞","m":"①高貴だ ②上品だ","c":"第一章 最重要語（形容動詞）","g":"90"},{"id":"91","no":91,"t":"見","w":"あからさまなり","k":"","p":"形容動詞","m":"①〈「あからさまに」の形で〉ほんのちょっと・一時的に","c":"第一章 最重要語（形容動詞）","g":"91"},{"id":"91-1","t":"類","w":"かりそめなり","k":"","p":"形容動詞","m":"ほんの一時的である","c":"第一章 最重要語（形容動詞）","g":"91"},{"id":"92","no":92,"t":"見","w":"みそかなり","k":"密かなり","p":"形容動詞","m":"①〈「みそかに」の形で〉ひそかに・こっそりと","c":"第一章 最重要語（形容動詞）","g":"92"},{"id":"93","no":93,"t":"見","w":"おろかなり","k":"疎かなり","p":"形容動詞","m":"①いい加減だ・疎略だ ②並ひととおりだ ③〈「〜とはおろかなり」などの形で〉（〜という言葉では）言い尽くせない","c":"第一章 最重要語（形容動詞）","g":"93"},{"id":"93-1","t":"類","w":"なほざりなり","k":"","p":"形容動詞","m":"本気でない・いい加減だ","c":"第一章 最重要語（形容動詞）","g":"93"},{"id":"94","no":94,"t":"見","w":"をこなり","k":"痴なり・烏許なり・尾籠なり","p":"形容動詞","m":"①愚かだ・まぬけだ・ばかばかしい","c":"第一章 最重要語（形容動詞）","g":"94"},{"id":"94-1","t":"関","w":"をこ","k":"","p":"名詞","m":"愚かなこと","c":"第一章 最重要語（形容動詞）","g":"94"},{"id":"94-2","t":"関","w":"をこがまし","k":"","p":"形容詞","m":"ばかばかしい","c":"第一章 最重要語（形容動詞）","g":"94"},{"id":"95","no":95,"t":"見","w":"むげなり","k":"無下なり","p":"形容動詞","m":"①ひどい・最低最悪だ ②〈「むげに」の形で副詞的に用いて〉むやみに・ひどく","c":"第一章 最重要語（形容動詞）","g":"95"},{"id":"96","no":96,"t":"見","w":"なかなかなり","k":"中々なり","p":"形容動詞","m":"①中途半端だ・どっちつかずだ ②かえってしないほうがよい・かえってないほうがましだ","c":"第一章 最重要語（形容動詞）","g":"96"},{"id":"97","no":97,"t":"見","w":"て","k":"手","p":"名詞","m":"①字・筆跡 ②（楽器の）演奏法・曲 ③手段・方法・やり方 ④傷・負傷","c":"第一章 最重要語（名詞）","g":"97"},{"id":"97-1","t":"関","w":"をんなで","k":"女手","p":"名詞","m":"平仮名","c":"第一章 最重要語（名詞）","g":"97"},{"id":"97-2","t":"関","w":"をとこで","k":"男手","p":"名詞","m":"漢字","c":"第一章 最重要語（名詞）","g":"97"},{"id":"97-3","t":"関","w":"てならひ","k":"手習ひ","p":"名詞","m":"①習字 ②心に浮かぶ歌などを書き流すこと","c":"第一章 最重要語（名詞）","g":"97"},{"id":"98","no":98,"t":"見","w":"ふみ","k":"文・書","p":"名詞","m":"①手紙 ②漢詩・漢文・漢学・漢籍〈漢文の書物〉","c":"第一章 最重要語（名詞）","g":"98"},{"id":"99","no":99,"t":"見","w":"せうそこ","k":"消息","p":"名詞","m":"①手紙 ②訪問の申し入れ・訪問のあいさつ","c":"第一章 最重要語（名詞）","g":"99"},{"id":"99-1","t":"関","w":"あない","k":"案内","p":"名詞","m":"内容・事情・取り次ぎ","c":"第一章 最重要語（名詞）","g":"99"},{"id":"100","no":100,"t":"見","w":"あそび","k":"遊び","p":"名詞","m":"①遊び〈楽しむこと〉〈現代語と同じ〉 ②管弦の遊び〈音楽を楽しむこと〉","c":"第一章 最重要語（名詞）","g":"100"},{"id":"100-1","t":"関","w":"あそぶ","k":"遊ぶ","p":"動詞","m":"管弦を楽しむ","c":"第一章 最重要語（名詞）","g":"100"},{"id":"101","no":101,"t":"見","w":"うへ","k":"上","p":"名詞","m":"①高貴な人のいる所 ②帝・天皇 ③（貴人の）奥様〈「北の方」という〉 ④身の上・〜に関わること","c":"第一章 最重要語（名詞）","g":"101"},{"id":"102","no":102,"t":"見","w":"おほやけ","k":"公","p":"名詞","m":"①朝廷・政府 ②帝・天皇 ③公的なこと〈現代語と同じ〉","c":"第一章 最重要語（名詞）","g":"102"},{"id":"102-1","t":"反","w":"わたくし","k":"私","p":"名詞","m":"個人的なこと","c":"第一章 最重要語（名詞）","g":"102"},{"id":"103","no":103,"t":"見","w":"うち","k":"内裏・内","p":"名詞","m":"①（建物の）内部 ②宮中・内裏 ③帝・天皇","c":"第一章 最重要語（名詞）","g":"103"},{"id":"103-1","t":"類","w":"くもゐ","k":"雲居","p":"名詞","m":"①空・雲 ②宮中","c":"第一章 最重要語（名詞）","g":"103"},{"id":"103-2","t":"類","w":"ここのへ・くものうへ・ももしき・おほうちやま","k":"九重・雲の上・百敷・大内山","p":"名詞","m":"宮中","c":"第一章 最重要語（名詞）","g":"103"},{"id":"104","no":104,"t":"見","w":"おまへ","k":"御前","p":"名詞","m":"①（神仏や貴人の）御前・お側 ②貴人への敬称、または貴人その人を表す","c":"第一章 最重要語（名詞）","g":"104"},{"id":"105","no":105,"t":"見","w":"みゆき","k":"行幸・御幸","p":"名詞","m":"①（帝や上皇の）お出かけ・お出まし〈帝には「行幸」を、上皇には「御幸」の字をあてる。前者は「ぎょうこう」、後者は「ごこう」とも読む〉","c":"第一章 最重要語（名詞）","g":"105"},{"id":"106","no":106,"t":"見","w":"たより","k":"頼り・便り","p":"名詞","m":"①よりどころ・頼みにできるもの ②つて・縁故・手づる ③よい機会・都合のよい折・ついで","c":"第一章 最重要語（名詞）","g":"106"},{"id":"106-1","t":"同","w":"たづき","k":"方便","p":"名詞","m":"手段・手がかり","c":"第一章 最重要語（名詞）","g":"106"},{"id":"107","no":107,"t":"見","w":"ものがたり","k":"物語","p":"名詞","m":"①世間話・雑談 ②物語〈『竹取物語』や『源氏物語』などの物語〉〈現代語と同じ〉","c":"第一章 最重要語（名詞）","g":"107"},{"id":"108","no":108,"t":"見","w":"ためし","k":"例","p":"名詞","m":"①前例・先例〈以前にあった事柄〉","c":"第一章 最重要語（名詞）","g":"108"},{"id":"109","no":109,"t":"見","w":"いそぎ","k":"急ぎ","p":"名詞","m":"①急なこと・急用〈現代語と同じ〉 ②支度・準備","c":"第一章 最重要語（名詞）","g":"109"},{"id":"109-1","t":"関","w":"いそぐ","k":"急ぐ","p":"動詞","m":"①急ぐ ②準備する","c":"第一章 最重要語（名詞）","g":"109"},{"id":"110","no":110,"t":"見","w":"ようい","k":"用意","p":"名詞","m":"①気配り・心づかい ②支度・準備〈現代語と同じ〉","c":"第一章 最重要語（名詞）","g":"110"},{"id":"111","no":111,"t":"見","w":"かたち","k":"形・容貌","p":"名詞","m":"①形・外見〈現代語と同じ〉 ②容貌・顔立ち","c":"第一章 最重要語（名詞）","g":"111"},{"id":"111-1","t":"同","w":"みめ","k":"見目","p":"名詞","m":"見た目・容貌","c":"第一章 最重要語（名詞）","g":"111"},{"id":"112","no":112,"t":"見","w":"かげ","k":"Ａ影／Ｂ陰","p":"名詞","m":"Ａ①光 ②姿・形　Ｂ③陰〈光の当たらない所〉・物陰〈現代語と同じ〉","c":"第一章 最重要語（名詞）","g":"112"},{"id":"113","no":113,"t":"見","w":"けしき","k":"気色","p":"名詞","m":"①様子 ②顔色・機嫌〈顔の様子〉 ③意向・意中〈心の中の様子〉","c":"第一章 最重要語（名詞）","g":"113"},{"id":"113-1","t":"関","w":"けしきばむ・けしきだつ","k":"気色ばむ・気色立つ","p":"動詞","m":"①様子が外に現れる ②思いを外に表す","c":"第一章 最重要語（名詞）","g":"113"},{"id":"114","no":114,"t":"見","w":"こころざし","k":"心ざし・志","p":"名詞","m":"①意志・意向〈何かをしようとする気持ち〉〈現代語と同じ〉 ②愛情・好意〈相手に寄せる気持ち〉 ③お礼の贈り物","c":"第一章 最重要語（名詞）","g":"114"},{"id":"115","no":115,"t":"見","w":"ほい","k":"本意","p":"名詞","m":"①本来の意志・かねてからの願い","c":"第一章 最重要語（名詞）","g":"115"},{"id":"115-1","t":"関","w":"あらまし","k":"","p":"名詞","m":"予想・期待","c":"第一章 最重要語（名詞）","g":"115"},{"id":"116","no":116,"t":"見","w":"こと","k":"言","p":"名詞","m":"①言葉 ②和歌","c":"第一章 最重要語（名詞）","g":"116"},{"id":"116-1","t":"関","w":"ことなり","k":"異なり","p":"形容動詞","m":"異なっている・格別だ","c":"第一章 最重要語（名詞）","g":"116"},{"id":"116-2","t":"関","w":"ことに","k":"殊に","p":"副詞","m":"特に・とりわけ","c":"第一章 最重要語（名詞）","g":"116"},{"id":"117","no":117,"t":"見","w":"わざ","k":"業","p":"名詞","m":"①こと〈事〉・行い ②葬儀・法事〈葬送の儀や追善供養〉","c":"第一章 最重要語（名詞）","g":"117"},{"id":"118","no":118,"t":"見","w":"よろづ","k":"万","p":"名詞","m":"①多くの数・さまざま・万事 ②〈副詞として使われ〉何ごとにつけても・すべてにわたって","c":"第一章 最重要語（名詞）","g":"118"},{"id":"119","no":119,"t":"見","w":"ことわり","k":"理","p":"名詞","m":"①道理〈もっともであること〉","c":"第一章 最重要語（名詞）","g":"119"},{"id":"119-1","t":"関","w":"ことわりなり","k":"","p":"形容動詞","m":"もっともである・当然である","c":"第一章 最重要語（名詞）","g":"119"},{"id":"119-2","t":"関","w":"ことわる","k":"","p":"動詞","m":"（道理に従って）判断・説明する","c":"第一章 最重要語（名詞）","g":"119"},{"id":"119-3","t":"関","w":"わりなし","k":"","p":"形容詞","m":"ひどい","c":"第一章 最重要語（名詞）","g":"119"},{"id":"120","no":120,"t":"見","w":"ひがこと・ひがごと","k":"僻事","p":"名詞","m":"①間違い・誤り〈道理にはずれたこと〉","c":"第一章 最重要語（名詞）","g":"120"},{"id":"120-1","t":"関","w":"ひがひがし","k":"","p":"形容詞","m":"①ひねくれている ②風流心がない","c":"第一章 最重要語（名詞）","g":"120"},{"id":"121","no":121,"t":"見","w":"そらごと","k":"空言・虚言","p":"名詞","m":"①嘘・偽り・作りごと","c":"第一章 最重要語（名詞）","g":"121"},{"id":"121-1","t":"反","w":"まこと","k":"真","p":"名詞","m":"真実","c":"第一章 最重要語（名詞）","g":"121"},{"id":"122","no":122,"t":"見","w":"しるし","k":"験・徴","p":"名詞","m":"①効き目・効果・効験 ②（神仏の）霊験・ご利益 ③前兆・きざし","c":"第一章 最重要語（名詞）","g":"122"},{"id":"123","no":123,"t":"見","w":"れう","k":"料","p":"名詞","m":"①ため・（何かの）ためのもの","c":"第一章 最重要語（名詞）","g":"123"},{"id":"124","no":124,"t":"見","w":"ろく","k":"禄","p":"名詞","m":"①ほうび（の品物）","c":"第一章 最重要語（名詞）","g":"124"},{"id":"124-1","t":"同","w":"かづけもの","k":"","p":"名詞","m":"ほうびの品物","c":"第一章 最重要語（名詞）","g":"124"},{"id":"125","no":125,"t":"見","w":"としごろ","k":"年頃・年比・年来","p":"名詞","m":"①数年（の間）・数年来・長年","c":"第一章 最重要語（名詞）","g":"125"},{"id":"125-1","t":"関","w":"ひごろ","k":"日頃","p":"名詞","m":"数日（の間）・平生・普段","c":"第一章 最重要語（名詞）","g":"125"},{"id":"125-2","t":"関","w":"つきごろ","k":"月頃","p":"名詞","m":"数か月（の間）","c":"第一章 最重要語（名詞）","g":"125"},{"id":"126","no":126,"t":"見","w":"つとめて","k":"","p":"名詞","m":"①早朝 ②翌朝","c":"第一章 最重要語（名詞）","g":"126"},{"id":"126-1","t":"同","w":"あした","k":"朝","p":"名詞","m":"①朝 ②翌朝","c":"第一章 最重要語（名詞）","g":"126"},{"id":"127","no":127,"t":"見","w":"よ・よのなか","k":"世・世の中","p":"名詞","m":"①世の中・世間〈現代語と同じ〉 ②（世の中の）人間関係・男女の仲・夫婦の仲 ③（人の）一生・（ある）御代 ※「世」は単に「時・折」の意でも使う","c":"第一章 最重要語（名詞）","g":"127"},{"id":"128","no":128,"t":"見","w":"いかで・いかでか","k":"","p":"副詞","m":"①どうして・どのように（〜だろうか）〈疑問〉 ②どうして（〜だろうか、いや、〜ない）〈反語〉 ③なんとかして（〜よう・〜たい・〜てほしい）〈意志・自己の願望・他への願望〉","c":"第一章 最重要語（副詞）","g":"128"},{"id":"129","no":129,"t":"見","w":"いかが・いかに","k":"","p":"副詞","m":"①どのように・どうして（〜だろうか）〈疑問〉 ②どうして（〜だろうか、いや、〜ない）〈反語〉 ③どんなにか・どれほど・なんとまあ（〜だろう）〈程度の強調・感嘆〉","c":"第一章 最重要語（副詞）","g":"129"},{"id":"130","no":130,"t":"見","w":"など・などて・などか・なじかは","k":"","p":"副詞","m":"①なぜ・どうして（〜か）","c":"第一章 最重要語（副詞）","g":"130"},{"id":"130-1","t":"同","w":"なぞ","k":"何ぞ","p":"副詞","m":"どうして","c":"第一章 最重要語（副詞）","g":"130"},{"id":"130-2","t":"同","w":"なに・なにか","k":"何・何か","p":"副詞","m":"どうして","c":"第一章 最重要語（副詞）","g":"130"},{"id":"130-3","t":"同","w":"なにしに","k":"何しに","p":"副詞","m":"どうして","c":"第一章 最重要語（副詞）","g":"130"},{"id":"131","no":131,"t":"見","w":"いつしか","k":"","p":"副詞","m":"①いつの間にか・早くも ②（できるだけ）早く（〜たい・〜てほしい）","c":"第一章 最重要語（副詞）","g":"131"},{"id":"132","no":132,"t":"見","w":"おのづから","k":"自ら","p":"副詞","m":"①自然と・ひとりでに ②偶然・たまたま ③〈仮定・推定表現を伴い〉万一・もしかして","c":"第一章 最重要語（副詞）","g":"132"},{"id":"132-1","t":"関","w":"みづから","k":"自ら","p":"名詞","m":"①わたし〈自称〉 ②その人自身","c":"第一章 最重要語（副詞）","g":"132"},{"id":"133","no":133,"t":"見","w":"なほ","k":"猶","p":"副詞","m":"①依然としてやはり〈変わらず〉 ②なんといってもやはり・それでもやはり ③さらに・いっそう","c":"第一章 最重要語（副詞）","g":"133"},{"id":"134","no":134,"t":"見","w":"いとど","k":"","p":"副詞","m":"①いっそう・ますます","c":"第一章 最重要語（副詞）","g":"134"},{"id":"134-1","t":"関","w":"いとどし","k":"","p":"形容詞","m":"いっそうはなはだしい","c":"第一章 最重要語（副詞）","g":"134"},{"id":"135","no":135,"t":"見","w":"げに","k":"実に","p":"副詞","m":"①（実際）本当に・なるほど（そのとおり）","c":"第一章 最重要語（副詞）","g":"135"},{"id":"135-1","t":"関","w":"けに","k":"","p":"副詞","m":"いっそう・ますます","c":"第一章 最重要語（副詞）","g":"135"},{"id":"136","no":136,"t":"見","w":"かく","k":"","p":"副詞","m":"①こう・このように","c":"第一章 最重要語（副詞）","g":"136"},{"id":"136-1","t":"関","w":"かかり","k":"","p":"ラ変動詞","m":"こうである〈「かく」＋「あり」〉","c":"第一章 最重要語（副詞）","g":"136"},{"id":"137","no":137,"t":"見","w":"さ","k":"","p":"副詞","m":"①そう・そのように","c":"第一章 最重要語（副詞）","g":"137"},{"id":"137-1","t":"関","w":"さり","k":"","p":"ラ変動詞","m":"そうである〈「さ」＋「あり」〉","c":"第一章 最重要語（副詞）","g":"137"},{"id":"138","no":138,"t":"見","w":"しか","k":"","p":"副詞","m":"①そう・そのように","c":"第一章 最重要語（副詞）","g":"138"},{"id":"138-1","t":"関","w":"しかり","k":"","p":"ラ変動詞","m":"そうである〈「しか」＋「あり」〉","c":"第一章 最重要語（副詞）","g":"138"},{"id":"138-2","t":"関","w":"かかるほどに","k":"","p":"連語","m":"こうしているうちに","c":"第一章 最重要語（副詞）","g":"138"},{"id":"138-3","t":"関","w":"かかれば","k":"","p":"連語","m":"こうであるので","c":"第一章 最重要語（副詞）","g":"138"},{"id":"138-4","t":"関","w":"かかれど","k":"","p":"連語","m":"こうではあるが","c":"第一章 最重要語（副詞）","g":"138"},{"id":"138-5","t":"関","w":"さりとて","k":"","p":"連語","m":"そうであるといって・だからといって","c":"第一章 最重要語（副詞）","g":"138"},{"id":"138-6","t":"関","w":"さりとも","k":"","p":"連語","m":"そうではあっても・いくらなんでも","c":"第一章 最重要語（副詞）","g":"138"},{"id":"138-7","t":"関","w":"さりながら","k":"","p":"連語","m":"そうではあるが","c":"第一章 最重要語（副詞）","g":"138"},{"id":"138-8","t":"関","w":"さるほどに","k":"","p":"連語","m":"そうしているうちに","c":"第一章 最重要語（副詞）","g":"138"},{"id":"138-9","t":"関","w":"されば","k":"","p":"連語","m":"そうであるから","c":"第一章 最重要語（副詞）","g":"138"},{"id":"138-10","t":"関","w":"しからば","k":"","p":"連語","m":"そうであるならば","c":"第一章 最重要語（副詞）","g":"138"},{"id":"138-11","t":"関","w":"しかるに・しかるを","k":"","p":"連語","m":"そうであるのに・ところが","c":"第一章 最重要語（副詞）","g":"138"},{"id":"138-12","t":"関","w":"しかれども","k":"","p":"連語","m":"そうであるけれども","c":"第一章 最重要語（副詞）","g":"138"},{"id":"139","no":139,"t":"見","w":"と","k":"","p":"副詞","m":"①そのように・あのように","c":"第一章 最重要語（副詞）","g":"139"},{"id":"139-1","t":"関","w":"とかく（とかう）","k":"","p":"副詞","m":"あれこれと","c":"第一章 最重要語（副詞）","g":"139"},{"id":"140","no":140,"t":"見","w":"やがて","k":"","p":"副詞","m":"①（ある状態が）そのまま ②（時間的に）すぐに","c":"第一章 最重要語（副詞）","g":"140"},{"id":"141","no":141,"t":"見","w":"すなはち","k":"即ち・則ち・乃ち","p":"副詞","m":"①すぐに・ただちに ②つまり・言い換えれば〈現代語と同じ〉","c":"第一章 最重要語（副詞）","g":"141"},{"id":"142","no":142,"t":"見","w":"やうやう・やうやく","k":"漸う・漸く","p":"副詞","m":"①しだいに・だんだんと ②やっと・かろうじて","c":"第一章 最重要語（副詞）","g":"142"},{"id":"142-1","t":"同","w":"やや","k":"","p":"副詞","m":"①しだいに ②かなり・いくらか","c":"第一章 最重要語（副詞）","g":"142"},{"id":"143","no":143,"t":"見","w":"やをら・やはら","k":"柔ら・和ら","p":"副詞","m":"①そっと・静かに","c":"第一章 最重要語（副詞）","g":"143"},{"id":"144","no":144,"t":"見","w":"なかなか（に）","k":"","p":"副詞","m":"①中途半端に・なまじ ②かえって・むしろ","c":"第一章 最重要語（副詞）","g":"144"},{"id":"144-1","t":"関","w":"なかなかなり","k":"中々なり","p":"形容動詞","m":"中途半端だ・かえってしないほうがよい","c":"第一章 最重要語（副詞）","g":"144"},{"id":"145","no":145,"t":"見","w":"さすがに","k":"","p":"副詞","m":"①そうはいってもやはり ②なんといってもやはり","c":"第一章 最重要語（副詞）","g":"145"},{"id":"146","no":146,"t":"見","w":"かたみに","k":"互に","p":"副詞","m":"①互いに","c":"第一章 最重要語（副詞）","g":"146"},{"id":"147","no":147,"t":"見","w":"うたて","k":"","p":"副詞","m":"①不快に・いやな感じに ②気味悪く・異様に怪しく","c":"第一章 最重要語（副詞）","g":"147"},{"id":"147-1","t":"関","w":"うたてし","k":"","p":"形容詞","m":"いやだ・嘆かわしい","c":"第一章 最重要語（副詞）","g":"147"},{"id":"148","no":148,"t":"見","w":"なべて","k":"","p":"副詞","m":"①一般に・すべて・みな同様に ②並ひととおり・普通・平凡","c":"第一章 最重要語（副詞）","g":"148"},{"id":"148-1","t":"関","w":"なべてならず","k":"","p":"慣用句","m":"並ひととおりでない","c":"第一章 最重要語（副詞）","g":"148"},{"id":"149","no":149,"t":"見","w":"わざと","k":"","p":"副詞","m":"①わざわざ ②特に・とりわけ・格別に ③〈下に「の」を伴い〉正式な・本格的な","c":"第一章 最重要語（副詞）","g":"149"},{"id":"149-1","t":"関","w":"わざとならず","k":"","p":"慣用句","m":"ことさらではない・さりげない","c":"第一章 最重要語（副詞）","g":"149"},{"id":"150","no":150,"t":"見","w":"あまた","k":"数多","p":"副詞","m":"①たくさん・数多く","c":"第一章 最重要語（副詞）","g":"150"},{"id":"150-1","t":"同","w":"そこばく","k":"","p":"副詞","m":"たくさん","c":"第一章 最重要語（副詞）","g":"150"},{"id":"151","no":151,"t":"見","w":"ここら・そこら","k":"","p":"副詞","m":"①たくさん・数多く ②たいそう・はなはだしく","c":"第一章 最重要語（副詞）","g":"151"},{"id":"152","no":152,"t":"見","w":"え（〜打消）","k":"","p":"副詞","m":"①〈下に打消を伴い〉（〜する）ことができない","c":"第一章 最重要語（副詞）","g":"152"},{"id":"152-1","t":"関","w":"えならず・えもいはず","k":"","p":"慣用句","m":"言いようもない","c":"第一章 最重要語（副詞）","g":"152"},{"id":"153","no":153,"t":"見","w":"な〜そ","k":"","p":"副詞","m":"①（〜する）な・（〜し）ないでくれ・（〜し）てはならない","c":"第一章 最重要語（副詞）","g":"153"},{"id":"154","no":154,"t":"見","w":"おほかた（〜打消）","k":"大方","p":"副詞","m":"①まったく・少しも・決して（〜ない） ②〈打消を伴わないで〉だいたい・概して","c":"第一章 最重要語（副詞）","g":"154"},{"id":"155","no":155,"t":"見","w":"さらに（〜打消）","k":"更に","p":"副詞","m":"①まったく・少しも・決して（〜ない） ②〈打消を伴わないで〉さらに・その上〈現代語と同じ〉","c":"第一章 最重要語（副詞）","g":"155"},{"id":"156","no":156,"t":"見","w":"世に（〜打消）","k":"世に","p":"副詞","m":"①まったく・少しも・決して（〜ない） ②〈打消を伴わないで〉実に・非常に","c":"第一章 最重要語（副詞）","g":"156"},{"id":"157","no":157,"t":"見","w":"たえて（〜打消）","k":"絶えて","p":"副詞","m":"①まったく・少しも・決して（〜ない）","c":"第一章 最重要語（副詞）","g":"157"},{"id":"158","no":158,"t":"見","w":"つゆ（〜打消）","k":"露","p":"副詞","m":"①まったく・少しも・決して（〜ない）","c":"第一章 最重要語（副詞）","g":"158"},{"id":"159","no":159,"t":"見","w":"ゆめ・ゆめゆめ（〜打消・禁止）","k":"","p":"副詞","m":"①まったく・少しも・決して（〜ない） ②決して（〜するな）","c":"第一章 最重要語（副詞）","g":"159"},{"id":"160","no":160,"t":"見","w":"つやつや（〜打消）","k":"","p":"副詞","m":"①まったく・少しも・決して（〜ない）","c":"第一章 最重要語（副詞）","g":"160"},{"id":"161","no":161,"t":"見","w":"をさをさ（〜打消）","k":"","p":"副詞","m":"①ほとんど（〜ない）","c":"第一章 最重要語（副詞）","g":"161"},{"id":"162","no":162,"t":"見","w":"よも（〜打消推量）","k":"","p":"副詞","m":"①まさか（〜ないだろう）","c":"第一章 最重要語（副詞）","g":"162"},{"id":"163","no":163,"t":"見","w":"あなかしこ（〜禁止）","k":"","p":"副詞","m":"①決して（〜するな）","c":"第一章 最重要語（副詞）","g":"163"},{"id":"164","no":164,"t":"見","w":"ためらふ","k":"","p":"動詞・ハ行四段","m":"①気持ちを静める・体を休める・病勢を落ち着かせる ②迷ってぐずぐずする・躊躇する・ためらう〈現代語と同じ〉","c":"第二章 重要語（動詞）","g":"164"},{"id":"165","no":165,"t":"見","w":"やすらふ","k":"休らふ","p":"動詞・ハ行四段","m":"①ためらう ②立ち止まる・ひと息入れる・休息する","c":"第二章 重要語（動詞）","g":"165"},{"id":"166","no":166,"t":"見","w":"かたらふ","k":"語らふ","p":"動詞・ハ行四段","m":"①親しく語る・語り合う ②親しく交際する・うちとける ③（男女が）契る・夫婦の関係を結ぶ ④相談する・仲間に引き入れる・説得する","c":"第二章 重要語（動詞）","g":"166"},{"id":"166-1","t":"関","w":"うちとく","k":"","p":"動詞","m":"①くつろぐ ②油断する・気を許す","c":"第二章 重要語（動詞）","g":"166"},{"id":"167","no":167,"t":"見","w":"すむ","k":"住む","p":"動詞・マ行四段","m":"①住む〈現代語と同じ〉 ②（女のもとに）通う・通ってともに暮らす","c":"第二章 重要語（動詞）","g":"167"},{"id":"167-1","t":"関","w":"しる","k":"知る","p":"動詞","m":"①親しく付き合う・男女の交際をする ②治める・領有する","c":"第二章 重要語（動詞）","g":"167"},{"id":"168","no":168,"t":"見","w":"やむ","k":"止む","p":"動詞・マ行四段","m":"①そのままになる・（そのまま）終わる","c":"第二章 重要語（動詞）","g":"168"},{"id":"168-1","t":"関","w":"（動詞＋）さす","k":"","p":"接尾語","m":"しかけてやめる","c":"第二章 重要語（動詞）","g":"168"},{"id":"169","no":169,"t":"見","w":"うつろふ","k":"移ろふ","p":"動詞・ハ行四段","m":"①移りゆく ②変わってゆく・色あせる ③心変わりする","c":"第二章 重要語（動詞）","g":"169"},{"id":"169-1","t":"関","w":"かる","k":"離る","p":"動詞","m":"離れる","c":"第二章 重要語（動詞）","g":"169"},{"id":"170","no":170,"t":"見","w":"みいだす","k":"見出だす","p":"動詞・サ行四段","m":"①外を見る ②見つけ出す","c":"第二章 重要語（動詞）","g":"170"},{"id":"170-1","t":"反","w":"みいる","k":"見入る","p":"動詞","m":"外から中を見る・のぞく","c":"第二章 重要語（動詞）","g":"170"},{"id":"170-2","t":"関","w":"もとむ","k":"求む","p":"動詞","m":"探す","c":"第二章 重要語（動詞）","g":"170"},{"id":"171","no":171,"t":"見","w":"もてなす","k":"","p":"動詞・サ行四段","m":"①（わが身を）処する・振る舞う ②（人を）待遇する・取り扱う・大切にする","c":"第二章 重要語（動詞）","g":"171"},{"id":"172","no":172,"t":"見","w":"あつかふ","k":"扱ふ","p":"動詞・ハ行四段","m":"①面倒を見る・世話をする・看病する ②もてあます","c":"第二章 重要語（動詞）","g":"172"},{"id":"173","no":173,"t":"見","w":"あくがる","k":"","p":"動詞・ラ行下二段","m":"①（魂が体から）さまよい出る・浮かれ歩く・（心が）うわの空になる","c":"第二章 重要語（動詞）","g":"173"},{"id":"174","no":174,"t":"見","w":"あふ","k":"Ａ合ふ（会ふ・逢ふ）／Ｂ敢ふ","p":"動詞・Ａハ行四段／Ｂハ行下二段","m":"Ａ①結婚する・男女が契る　Ｂ②〈打消を伴い〉耐えられない・我慢できない ③〈動詞につき、打消を伴い〉〜きれない・〜できない ④〈「あへなむ」の形で〉かまわないだろう・差し支えないだろう","c":"第二章 重要語（動詞）","g":"174"},{"id":"174-1","t":"関","w":"あはす","k":"","p":"他動詞","m":"結婚させる","c":"第二章 重要語（動詞）","g":"174"},{"id":"174-2","t":"関","w":"とりあへず","k":"","p":"副詞","m":"すぐに","c":"第二章 重要語（動詞）","g":"174"},{"id":"175","no":175,"t":"見","w":"しほたる","k":"潮垂る","p":"動詞・ラ行下二段","m":"①涙を流す・涙で袖が濡れる","c":"第二章 重要語（動詞）","g":"175"},{"id":"176","no":176,"t":"見","w":"かきくらす","k":"掻き暗す","p":"動詞・サ行四段","m":"①空を暗くする・あたり一面を暗くする ②心を暗くする・悲しみにくれる","c":"第二章 重要語（動詞）","g":"176"},{"id":"176-1","t":"関","w":"つゆけし","k":"露けし","p":"形容詞","m":"①露が多い ②涙がちだ","c":"第二章 重要語（動詞）","g":"176"},{"id":"177","no":177,"t":"見","w":"まどふ","k":"惑ふ","p":"動詞・ハ行四段","m":"①迷う・悩む・途方にくれる・うろたえる・心が乱れる ②〈動詞の連用形について〉ひどく（〜する）","c":"第二章 重要語（動詞）","g":"177"},{"id":"178","no":178,"t":"見","w":"たばかる","k":"謀る","p":"動詞・ラ行四段","m":"①考えをめぐらす・工夫する ②だます・たくらむ","c":"第二章 重要語（動詞）","g":"178"},{"id":"178-1","t":"同","w":"はかる","k":"","p":"動詞","m":"企てる・だます","c":"第二章 重要語（動詞）","g":"178"},{"id":"179","no":179,"t":"見","w":"すさぶ","k":"荒ぶ・進ぶ・遊ぶ","p":"動詞・バ行四段・上二段","m":"①（何かに）興じる・楽しむ・気の向くままに（何かを）する・慰みに（何かを）する","c":"第二章 重要語（動詞）","g":"179"},{"id":"179-1","t":"関","w":"すさびごと","k":"","p":"名詞","m":"慰みごと・楽しみや気晴らしになること","c":"第二章 重要語（動詞）","g":"179"},{"id":"180","no":180,"t":"見","w":"すまふ","k":"争ふ・辞ふ","p":"動詞・ハ行四段","m":"①抵抗する・争う ②辞退する・断る","c":"第二章 重要語（動詞）","g":"180"},{"id":"181","no":181,"t":"見","w":"まねぶ","k":"学ぶ","p":"動詞・バ行四段","m":"①まねる ②（見聞した物事をそのまま）伝える・書き記す","c":"第二章 重要語（動詞）","g":"181"},{"id":"182","no":182,"t":"見","w":"ねぶ","k":"","p":"動詞・バ行上二段","m":"①年をとる・成長する ②大人びる・ませる","c":"第二章 重要語（動詞）","g":"182"},{"id":"182-1","t":"同","w":"およすく・およすぐ","k":"","p":"動詞","m":"①成長する ②大人びる","c":"第二章 重要語（動詞）","g":"182"},{"id":"183","no":183,"t":"見","w":"おきつ","k":"掟つ","p":"動詞・タ行下二段","m":"①（こうしようと心に）決めておく・計画する ②（こうしろと）指図する・命令する","c":"第二章 重要語（動詞）","g":"183"},{"id":"184","no":184,"t":"見","w":"うれふ","k":"愁ふ・憂ふ","p":"動詞・ハ行下二段","m":"①（嘆き）訴える・不平を言う","c":"第二章 重要語（動詞）","g":"184"},{"id":"184-1","t":"関","w":"うれへ","k":"愁へ・憂へ","p":"名詞","m":"訴え","c":"第二章 重要語（動詞）","g":"184"},{"id":"185","no":185,"t":"見","w":"むすぶ","k":"Ａ結ぶ／Ｂ掬ぶ","p":"動詞・バ行四段","m":"Ａ①作る・できる ②契る・約束する　Ｂ③（両手で水などを）すくう","c":"第二章 重要語（動詞）","g":"185"},{"id":"185-1","t":"関","w":"こしらふ","k":"","p":"動詞","m":"なだめすかす・説得する","c":"第二章 重要語（動詞）","g":"185"},{"id":"186","no":186,"t":"見","w":"とぶらふ","k":"Ａ訪ふ／Ｂ弔ふ","p":"動詞・ハ行四段","m":"Ａ①訪ねる・尋ね求める ②見舞う　Ｂ③弔う（＝弔問する・供養する）","c":"第二章 重要語（動詞）","g":"186"},{"id":"186-1","t":"同","w":"とふ・おとなふ・おとづる","k":"問ふ・訪る","p":"動詞","m":"訪ねる","c":"第二章 重要語（動詞）","g":"186"},{"id":"186-2","t":"関","w":"たづぬ","k":"尋ぬ","p":"動詞","m":"探し求める","c":"第二章 重要語（動詞）","g":"186"},{"id":"187","no":187,"t":"見","w":"やつす","k":"","p":"動詞・サ行四段","m":"①目立たない服装（様子）にする・質素にする・みすぼらしくする ②出家する","c":"第二章 重要語（動詞）","g":"187"},{"id":"187-1","t":"関","w":"やつる","k":"","p":"自動詞","m":"目立たない服装（様子）になる・粗末な服装（様子）になる","c":"第二章 重要語（動詞）","g":"187"},{"id":"188","no":188,"t":"見","w":"さはる","k":"障る","p":"動詞・ラ行四段","m":"①差し障る・差し支える・妨げられる","c":"第二章 重要語（動詞）","g":"188"},{"id":"188-1","t":"関","w":"さはり","k":"障り","p":"名詞","m":"支障","c":"第二章 重要語（動詞）","g":"188"},{"id":"189","no":189,"t":"見","w":"かしこまる","k":"畏まる","p":"動詞・ラ行四段","m":"①恐縮する・恐縮して正座する・お礼を申し上げる・謹慎する","c":"第二章 重要語（動詞）","g":"189"},{"id":"190","no":190,"t":"見","w":"かこつ","k":"託つ","p":"動詞・タ行四段","m":"①嘆く・不平を言う","c":"第二章 重要語（動詞）","g":"190"},{"id":"190-1","t":"関","w":"かごと","k":"託言","p":"名詞","m":"①言い訳 ②恨み言・愚痴","c":"第二章 重要語（動詞）","g":"190"},{"id":"190-2","t":"関","w":"かごとがまし","k":"","p":"形容詞","m":"恨みがましい・嘆いているようだ","c":"第二章 重要語（動詞）","g":"190"},{"id":"191","no":191,"t":"見","w":"わく","k":"分く","p":"動詞・カ行四段","m":"①分ける・区別する〈現代語と同じ〉 ②理解する","c":"第二章 重要語（動詞）","g":"191"},{"id":"191-1","t":"関","w":"わきがたし","k":"","p":"形容詞","m":"理解しがたい","c":"第二章 重要語（動詞）","g":"191"},{"id":"192","no":192,"t":"見","w":"つつむ","k":"慎む","p":"動詞・マ行四段","m":"①遠慮する・はばかる","c":"第二章 重要語（動詞）","g":"192"},{"id":"192-1","t":"関","w":"つつまし","k":"","p":"形容詞","m":"遠慮される・気がひける","c":"第二章 重要語（動詞）","g":"192"},{"id":"193","no":193,"t":"見","w":"あらまほし","k":"","p":"形容詞・シク活用","m":"①理想的だ・望ましい","c":"第二章 重要語（形容詞）","g":"193"},{"id":"194","no":194,"t":"見","w":"らうらうじ","k":"労労じ","p":"形容詞・シク活用","m":"①巧みだ・もの慣れている・気がきいている・配慮が行き届いている ②上品だ・（気高く）美しい","c":"第二章 重要語（形容詞）","g":"194"},{"id":"195","no":195,"t":"見","w":"うるせし","k":"","p":"形容詞・ク活用","m":"①賢い・優れている ②巧みだ・優れている","c":"第二章 重要語（形容詞）","g":"195"},{"id":"195-1","t":"関","w":"うるさし","k":"","p":"形容詞","m":"①煩わしい ②立派だ","c":"第二章 重要語（形容詞）","g":"195"},{"id":"196","no":196,"t":"見","w":"はかばかし","k":"","p":"形容詞・シク活用","m":"①しっかりしている・きちんとしている ②はっきりしている","c":"第二章 重要語（形容詞）","g":"196"},{"id":"197","no":197,"t":"見","w":"をさをさし","k":"長長し","p":"形容詞・シク活用","m":"①しっかりしている ②大人びている","c":"第二章 重要語（形容詞）","g":"197"},{"id":"198","no":198,"t":"見","w":"さうなし","k":"双無し","p":"形容詞・ク活用","m":"①比べるものがない・すばらしい","c":"第二章 重要語（形容詞）","g":"198"},{"id":"198-1","t":"関","w":"さうなし","k":"左右無し","p":"形容詞","m":"①あれこれ考えない・簡単だ ②決着がつかない","c":"第二章 重要語（形容詞）","g":"198"},{"id":"198-2","t":"同","w":"にな（二無）し・またな（又無）し","k":"","p":"形容詞","m":"この上もない","c":"第二章 重要語（形容詞）","g":"198"},{"id":"199","no":199,"t":"見","w":"くまなし","k":"隈無し","p":"形容詞・ク活用","m":"①暗いところがない・陰がない ②なんでも知っている・行き届いている・抜かりがない","c":"第二章 重要語（形容詞）","g":"199"},{"id":"199-1","t":"関","w":"くま","k":"隈","p":"名詞","m":"人目に付かない片隅・暗い物陰","c":"第二章 重要語（形容詞）","g":"199"},{"id":"200","no":200,"t":"見","w":"ずちなし","k":"術無し","p":"形容詞・ク活用","m":"①どうしようもない","c":"第二章 重要語（形容詞）","g":"200"},{"id":"200-1","t":"同","w":"せむかたなし","k":"","p":"形容詞","m":"どうしようもない","c":"第二章 重要語（形容詞）","g":"200"},{"id":"201","no":201,"t":"見","w":"まさなし","k":"","p":"形容詞・ク活用","m":"①よくない・見苦しい","c":"第二章 重要語（形容詞）","g":"201"},{"id":"202","no":202,"t":"見","w":"あいなし","k":"","p":"形容詞・ク活用","m":"①気に入らない・つまらない ②〈「あいなく（う）」の形で副詞的に用いて〉なんとなく・わけもなく・むやみに","c":"第二章 重要語（形容詞）","g":"202"},{"id":"202-1","t":"同","w":"あぢきなし","k":"","p":"形容詞","m":"おもしろくない・つまらない","c":"第二章 重要語（形容詞）","g":"202"},{"id":"203","no":203,"t":"見","w":"はかなし","k":"","p":"形容詞・ク活用","m":"①頼りない・むなしい・はかない ②ちょっとしたことだ・取るに足りない","c":"第二章 重要語（形容詞）","g":"203"},{"id":"203-1","t":"関","w":"そこはかとなし","k":"","p":"形容詞","m":"何ということもない","c":"第二章 重要語（形容詞）","g":"203"},{"id":"204","no":204,"t":"見","w":"こころづきなし","k":"","p":"形容詞・ク活用","m":"①気にくわない・好感がもてない・心ひかれない","c":"第二章 重要語（形容詞）","g":"204"},{"id":"204-1","t":"同","w":"こころやまし","k":"","p":"形容詞","m":"不愉快だ・いらだたしい","c":"第二章 重要語（形容詞）","g":"204"},{"id":"205","no":205,"t":"見","w":"あへなし","k":"敢へ無し","p":"形容詞・ク活用","m":"①期待はずれだ・落胆している・張り合いがない ②はかない・どうしようもない","c":"第二章 重要語（形容詞）","g":"205"},{"id":"206","no":206,"t":"見","w":"よしなし","k":"由無し","p":"形容詞・ク活用","m":"①理由がない ②方法がない ③つまらない・意味がない ④関係がない・縁がない","c":"第二章 重要語（形容詞）","g":"206"},{"id":"206-1","t":"関","w":"よしなしごと","k":"","p":"名詞","m":"つまらないこと","c":"第二章 重要語（形容詞）","g":"206"},{"id":"207","no":207,"t":"見","w":"おほけなし","k":"","p":"形容詞・ク活用","m":"①身のほど知らずだ・身分不相応だ・おそれ多い","c":"第二章 重要語（形容詞）","g":"207"},{"id":"208","no":208,"t":"見","w":"さがなし","k":"","p":"形容詞・ク活用","m":"①意地が悪い・口やかましい ②いたずらだ・やんちゃだ","c":"第二章 重要語（形容詞）","g":"208"},{"id":"208-1","t":"関","w":"たいだいし","k":"","p":"形容詞","m":"もってのほかだ・不都合だ","c":"第二章 重要語（形容詞）","g":"208"},{"id":"209","no":209,"t":"見","w":"はしたなし","k":"","p":"形容詞・ク活用","m":"①中途半端だ・どっちつかずだ ②（どっちつかずで）いたたまれない・きまり悪い ③（いたたまれないほど）そっけない・愛想がない ④はなはだしい・激しい","c":"第二章 重要語（形容詞）","g":"209"},{"id":"209-1","t":"関","w":"はしたなむ","k":"","p":"動詞","m":"恥ずかしい思いをさせる","c":"第二章 重要語（形容詞）","g":"209"},{"id":"210","no":210,"t":"見","w":"しどけなし","k":"","p":"形容詞・ク活用","m":"①だらしない・乱れている・怠慢だ ②無造作だ・くつろいでいる・気楽だ","c":"第二章 重要語（形容詞）","g":"210"},{"id":"211","no":211,"t":"見","w":"いぎたなし","k":"","p":"形容詞・ク活用","m":"①寝坊だ・ぐっすり寝込んでいる","c":"第二章 重要語（形容詞）","g":"211"},{"id":"212","no":212,"t":"見","w":"ひとわろし","k":"人悪し","p":"形容詞・ク活用","m":"①みっともない・体裁が悪い","c":"第二章 重要語（形容詞）","g":"212"},{"id":"212-1","t":"関","w":"ものぐるほし","k":"","p":"形容詞","m":"正気を失ったようだ","c":"第二章 重要語（形容詞）","g":"212"},{"id":"213","no":213,"t":"見","w":"いぶせし","k":"","p":"形容詞・ク活用","m":"①うっとうしい・気が晴れない・不快だ ②気がかりだ","c":"第二章 重要語（形容詞）","g":"213"},{"id":"213-1","t":"関","w":"いぶかし","k":"","p":"形容詞","m":"気がかりだ・もっと知りたい","c":"第二章 重要語（形容詞）","g":"213"},{"id":"214","no":214,"t":"見","w":"くちをし","k":"口惜し","p":"形容詞・シク活用","m":"①残念だ・がっかりだ・つまらない","c":"第二章 重要語（形容詞）","g":"214"},{"id":"215","no":215,"t":"見","w":"あたらし","k":"惜し","p":"形容詞・シク活用","m":"①惜しい・もったいない","c":"第二章 重要語（形容詞）","g":"215"},{"id":"215-1","t":"関","w":"あたら","k":"","p":"連体詞・副詞","m":"惜しむべき・惜しいことに","c":"第二章 重要語（形容詞）","g":"215"},{"id":"216","no":216,"t":"見","w":"ねたし","k":"妬し","p":"形容詞・ク活用","m":"①くやしい・しゃくだ・にくらしい","c":"第二章 重要語（形容詞）","g":"216"},{"id":"217","no":217,"t":"見","w":"こちたし","k":"","p":"形容詞・ク活用","m":"①（噂や評判が）うるさい・煩わしい ②大げさだ・仰々しい ③非常に多い・はなはだしい","c":"第二章 重要語（形容詞）","g":"217"},{"id":"217-1","t":"関","w":"こちなし","k":"","p":"形容詞","m":"①不作法だ・ぶしつけだ ②無骨だ・無風流だ","c":"第二章 重要語（形容詞）","g":"217"},{"id":"218","no":218,"t":"見","w":"けし","k":"怪し・異し","p":"形容詞・シク活用","m":"①異様だ・変だ・よくない","c":"第二章 重要語（形容詞）","g":"218"},{"id":"218-1","t":"関","w":"けしからず","k":"","p":"慣用句","m":"よくない","c":"第二章 重要語（形容詞）","g":"218"},{"id":"218-2","t":"関","w":"けしう（は）あらず","k":"","p":"慣用句","m":"悪くはない","c":"第二章 重要語（形容詞）","g":"218"},{"id":"219","no":219,"t":"見","w":"わびし","k":"侘びし","p":"形容詞・シク活用","m":"①つらい・苦しい・やりきれない・困ったことだ ②わびしい・心細い・貧しい〈現代語と同じ〉","c":"第二章 重要語（形容詞）","g":"219"},{"id":"220","no":220,"t":"見","w":"こころぐるし","k":"心苦し","p":"形容詞・シク活用","m":"①心が苦しい・せつなくつらい ②気の毒だ・気がかりだ・心配だ","c":"第二章 重要語（形容詞）","g":"220"},{"id":"221","no":221,"t":"見","w":"まだし","k":"未し","p":"形容詞・シク活用","m":"①まだ早い・まだその時期ではない・未熟だ","c":"第二章 重要語（形容詞）","g":"221"},{"id":"221-1","t":"関","w":"まだき","k":"","p":"副詞","m":"早くも・もう","c":"第二章 重要語（形容詞）","g":"221"},{"id":"221-2","t":"関","w":"またし","k":"全し","p":"形容詞","m":"完全だ","c":"第二章 重要語（形容詞）","g":"221"},{"id":"222","no":222,"t":"見","w":"さかし","k":"賢し","p":"形容詞・シク活用","m":"①賢い・優れている・巧みだ ②しっかりしている・気丈だ ③利口ぶっている・こざかしい","c":"第二章 重要語（形容詞）","g":"222"},{"id":"222-1","t":"関","w":"さかしら","k":"","p":"名詞","m":"利口ぶること・こざかしさ","c":"第二章 重要語（形容詞）","g":"222"},{"id":"223","no":223,"t":"見","w":"まばゆし","k":"","p":"形容詞・ク活用","m":"①まぶしい ②（まぶしいほど）美しい・立派だ・すばらしい ③きまり悪い・恥ずかしい ④見ていられない・（目をそむけたいほど）いやだ","c":"第二章 重要語（形容詞）","g":"223"},{"id":"224","no":224,"t":"見","w":"かたじけなし","k":"忝し","p":"形容詞・ク活用","m":"①おそれ多い・申しわけない ②おそれ多い・もったいない・ありがたい ③恥ずかしい・面目ない","c":"第二章 重要語（形容詞）","g":"224"},{"id":"225","no":225,"t":"見","w":"かしこし","k":"畏し・賢し","p":"形容詞・ク活用","m":"①恐ろしい ②おそれ多い・もったいない・尊い ③賢い・優れている・立派だ・ありがたい ④〈主に「かしこく（う）」の形で〉うまい具合に・運のいいことに","c":"第二章 重要語（形容詞）","g":"225"},{"id":"226","no":226,"t":"見","w":"しげし","k":"繁し・茂し","p":"形容詞・ク活用","m":"①（何かが）多い","c":"第二章 重要語（形容詞）","g":"226"},{"id":"226-1","t":"関","w":"けやけし","k":"","p":"形容詞","m":"①際立っている・はっきりしている ②（際立って）すばらしい ③（際立って）異様だ・悪い・生意気だ","c":"第二章 重要語（形容詞）","g":"226"},{"id":"227","no":227,"t":"見","w":"すごし","k":"凄し","p":"形容詞・ク活用","m":"①気味が悪い・恐ろしい ②さびしい・殺風景だ ③（ぞっとするほど）すばらしい・美しい","c":"第二章 重要語（形容詞）","g":"227"},{"id":"228","no":228,"t":"見","w":"いたし","k":"甚し・痛し","p":"形容詞・ク活用","m":"①とてもよい・すばらしい ②とても悪い・ひどい ③〈「いたく（う）」の形で副詞的に用いて〉とても・はなはだしく ④〈③の形で打消を伴って〉それほど・あまり","c":"第二章 重要語（形容詞）","g":"228"},{"id":"229","no":229,"t":"見","w":"おぼろけなり","k":"","p":"形容動詞","m":"①並ひととおりだ・ありきたりだ ②並ひととおりではない・格別だ","c":"第二章 重要語（形容動詞）","g":"229"},{"id":"229-1","t":"関","w":"おぼろけならず","k":"","p":"慣用句","m":"並ひととおりではない","c":"第二章 重要語（形容動詞）","g":"229"},{"id":"230","no":230,"t":"見","w":"なのめなり","k":"斜めなり","p":"形容動詞","m":"①並ひととおりだ・普通だ ②不十分だ・いい加減だ ③並ひととおりではない・格別だ〈鎌倉時代以降〉","c":"第二章 重要語（形容動詞）","g":"230"},{"id":"230-1","t":"関","w":"なのめならず","k":"","p":"慣用句","m":"並ひととおりではない","c":"第二章 重要語（形容動詞）","g":"230"},{"id":"231","no":231,"t":"見","w":"きよらなり・けうらなり","k":"清らなり","p":"形容動詞","m":"①清らかで美しい","c":"第二章 重要語（形容動詞）","g":"231"},{"id":"231-1","t":"関","w":"きよげなり","k":"清げなり","p":"形容動詞","m":"さっぱりとして美しい","c":"第二章 重要語（形容動詞）","g":"231"},{"id":"232","no":232,"t":"見","w":"まほなり","k":"","p":"形容動詞","m":"①欠点がなく優れている・完全である","c":"第二章 重要語（形容動詞）","g":"232"},{"id":"232-1","t":"反","w":"かたほなり","k":"","p":"形容動詞","m":"不完全だ・未熟だ","c":"第二章 重要語（形容動詞）","g":"232"},{"id":"233","no":233,"t":"見","w":"あらはなり","k":"顕なり","p":"形容動詞","m":"①（隠れなく）はっきり見える・まる見えである","c":"第二章 重要語（形容動詞）","g":"233"},{"id":"234","no":234,"t":"見","w":"あながちなり","k":"強ちなり","p":"形容動詞","m":"①強引だ・無理やりだ・いちずだ ②〈連用形を副詞的に用いて〉むやみに・あまりに","c":"第二章 重要語（形容動詞）","g":"234"},{"id":"235","no":235,"t":"見","w":"せちなり","k":"切なり","p":"形容動詞","m":"①切実である・ひたすらだ・さし迫っている ②大切である","c":"第二章 重要語（形容動詞）","g":"235"},{"id":"236","no":236,"t":"見","w":"とみなり","k":"頓なり","p":"形容動詞","m":"①急だ・突然だ","c":"第二章 重要語（形容動詞）","g":"236"},{"id":"236-1","t":"関","w":"とみに","k":"","p":"副詞","m":"急に・すぐに","c":"第二章 重要語（形容動詞）","g":"236"},{"id":"237","no":237,"t":"見","w":"うちつけなり","k":"","p":"形容動詞","m":"①急だ・突然だ・にわかだ ②軽率だ・考えが浅い・場当たりだ","c":"第二章 重要語（形容動詞）","g":"237"},{"id":"237-1","t":"関","w":"おもはずなり","k":"思はずなり","p":"形容動詞","m":"①思いがけない ②不満だ","c":"第二章 重要語（形容動詞）","g":"237"},{"id":"238","no":238,"t":"見","w":"さらなり","k":"更なり","p":"形容動詞","m":"①言うまでもない・もちろんだ","c":"第二章 重要語（形容動詞）","g":"238"},{"id":"239","no":239,"t":"見","w":"ねんごろなり・ねむごろなり","k":"懇ろなり","p":"形容動詞","m":"①心を込めている・熱心だ・丁寧だ ②親密だ・仲むつまじい","c":"第二章 重要語（形容動詞）","g":"239"},{"id":"240","no":240,"t":"見","w":"おいらかなり","k":"","p":"形容動詞","m":"①穏やかだ・おっとりしている","c":"第二章 重要語（形容動詞）","g":"240"},{"id":"240-1","t":"同","w":"おほどかなり","k":"","p":"形容動詞","m":"おっとりしている","c":"第二章 重要語（形容動詞）","g":"240"},{"id":"241","no":241,"t":"見","w":"あやにくなり","k":"","p":"形容動詞","m":"①意地が悪い・にくらしいほどひどい ②都合が悪い・間が悪い・あいにくだ","c":"第二章 重要語（形容動詞）","g":"241"},{"id":"242","no":242,"t":"見","w":"おぼえ","k":"覚え","p":"名詞","m":"①（世間の）評判・人望 ②〈多く「御覚え」の形で〉寵愛されること・信任されること","c":"第二章 重要語（名詞）","g":"242"},{"id":"242-1","t":"関","w":"な","k":"名","p":"名詞","m":"評判","c":"第二章 重要語（名詞）","g":"242"},{"id":"243","no":243,"t":"見","w":"ひま","k":"隙・暇","p":"名詞","m":"①間・すき間 ②絶え間・合間 ③時間的ゆとり・暇","c":"第二章 重要語（名詞）","g":"243"},{"id":"244","no":244,"t":"見","w":"いとま","k":"暇","p":"名詞","m":"①時間的ゆとり・暇 ②（仕事を）休むこと・別れること・別れの挨拶","c":"第二章 重要語（名詞）","g":"244"},{"id":"245","no":245,"t":"見","w":"ざえ","k":"才","p":"名詞","m":"①（漢学・漢詩文の）教養・学才 ②（和歌・音楽などの）技能・才能","c":"第二章 重要語（名詞）","g":"245"},{"id":"246","no":246,"t":"見","w":"よろこび","k":"喜び","p":"名詞","m":"①喜び・お祝い（ごと） ②（昇進・任官の）お礼","c":"第二章 重要語（名詞）","g":"246"},{"id":"246-1","t":"関","w":"よろこびまうし","k":"よろこび申し","p":"名詞","m":"お礼を申し上げること","c":"第二章 重要語（名詞）","g":"246"},{"id":"247","no":247,"t":"見","w":"こころばへ","k":"心ばへ","p":"名詞","m":"①気だて・性質（心の様子） ②心づかい・気配り ③趣・風情・趣意","c":"第二章 重要語（名詞）","g":"247"},{"id":"247-1","t":"同","w":"こころばせ","k":"心ばせ","p":"名詞","m":"①気だて・性質 ②心づかい・気配り","c":"第二章 重要語（名詞）","g":"247"},{"id":"248","no":248,"t":"見","w":"こころづくし","k":"心尽くし","p":"名詞","m":"①もの思いをすること・気をもむこと","c":"第二章 重要語（名詞）","g":"248"},{"id":"249","no":249,"t":"見","w":"そこ","k":"","p":"名詞（人称代名詞）","m":"①あなた〈二人称〉","c":"第二章 重要語（名詞）","g":"249"},{"id":"250","no":250,"t":"見","w":"ここ","k":"","p":"名詞（人称代名詞）","m":"①このわたし〈一人称〉 ②あなた〈二人称〉","c":"第二章 重要語（名詞）","g":"250"},{"id":"251","no":251,"t":"見","w":"かれ","k":"","p":"名詞（人称代名詞）","m":"①あの人（＝あの男・あの女） ②あれ・あのもの","c":"第二章 重要語（名詞）","g":"251"},{"id":"252","no":252,"t":"見","w":"それ","k":"","p":"名詞（人称代名詞）","m":"①その人 ②あなた〈二人称〉","c":"第二章 重要語（名詞）","g":"252"},{"id":"253","no":253,"t":"見","w":"これ","k":"","p":"名詞（人称代名詞）","m":"①この人 ②このわたし〈一人称〉 ③あなた〈二人称〉","c":"第二章 重要語（名詞）","g":"253"},{"id":"254","no":254,"t":"見","w":"あなた","k":"","p":"名詞","m":"①あちら・向こう〈遠くのほう〉","c":"第二章 重要語（名詞）","g":"254"},{"id":"255","no":255,"t":"見","w":"そなた","k":"","p":"名詞（人称代名詞）","m":"①そちら ②あなた〈二人称〉","c":"第二章 重要語（名詞）","g":"255"},{"id":"256","no":256,"t":"見","w":"こなた","k":"","p":"名詞（人称代名詞）","m":"①こちら ②このわたし〈一人称〉","c":"第二章 重要語（名詞）","g":"256"},{"id":"257","no":257,"t":"見","w":"そのかみ","k":"","p":"名詞","m":"①その当時・その昔・往時","c":"第二章 重要語（名詞）","g":"257"},{"id":"257-1","t":"関","w":"たうじ","k":"当時","p":"名詞","m":"①現在・今 ②その時・その折","c":"第二章 重要語（名詞）","g":"257"},{"id":"258","no":258,"t":"見","w":"せうと","k":"兄人","p":"名詞","m":"①兄・弟〈ほとんど「兄」を指す〉","c":"第二章 重要語（名詞）","g":"258"},{"id":"258-1","t":"同","w":"このかみ","k":"兄","p":"名詞","m":"①兄・姉 ②年長者","c":"第二章 重要語（名詞）","g":"258"},{"id":"259","no":259,"t":"見","w":"おとうと・おとと","k":"弟","p":"名詞","m":"①弟・妹","c":"第二章 重要語（名詞）","g":"259"},{"id":"260","no":260,"t":"見","w":"いも","k":"妹","p":"名詞","m":"①いとしいあなた〈妻・恋人〉","c":"第二章 重要語（名詞）","g":"260"},{"id":"260-1","t":"反","w":"せ","k":"背","p":"名詞","m":"いとしい人〈夫・恋人〉","c":"第二章 重要語（名詞）","g":"260"},{"id":"261","no":261,"t":"見","w":"つま","k":"夫・妻","p":"名詞","m":"①夫・妻","c":"第二章 重要語（名詞）","g":"261"},{"id":"261-1","t":"関","w":"つま","k":"端","p":"名詞","m":"①はし・へり ②端緒・きっかけ","c":"第二章 重要語（名詞）","g":"261"},{"id":"262","no":262,"t":"見","w":"はらから","k":"同胞","p":"名詞","m":"①兄弟・姉妹","c":"第二章 重要語（名詞）","g":"262"},{"id":"263","no":263,"t":"見","w":"かたへ","k":"片方","p":"名詞","m":"①片方・半分・一部分 ②側・傍ら ③仲間・同僚〈傍らの人〉","c":"第二章 重要語（名詞）","g":"263"},{"id":"264","no":264,"t":"見","w":"ほど","k":"程","p":"名詞","m":"①間・うち・時・ころ〈時間の程度〉 ②距離・広さ・あたり〈空間の程度〉 ③身分・地位・年齢〈人間の程度〉 ④様子・ありさま〈物の程度〉","c":"第二章 重要語（名詞）","g":"264"},{"id":"265","no":265,"t":"見","w":"かぎり","k":"限り","p":"名詞","m":"①限度・限界 ②極み・極致〈物事の上限〉 ③最期・臨終・葬送〈人生の限界点〉 ④全部・すべて〈限界点までの範囲〉","c":"第二章 重要語（名詞）","g":"265"},{"id":"265-1","t":"関","w":"かぎりなし","k":"限りなし","p":"形容詞","m":"この上もない","c":"第二章 重要語（名詞）","g":"265"},{"id":"265-2","t":"関","w":"けぢめ","k":"","p":"名詞","m":"違い・隔て・隔たり","c":"第二章 重要語（名詞）","g":"265"},{"id":"266","no":266,"t":"見","w":"きは","k":"際","p":"名詞","m":"①端・限り・終わり ②程度（ほど）・身分〈身のほど〉","c":"第二章 重要語（名詞）","g":"266"},{"id":"266-1","t":"同","w":"しな","k":"品","p":"名詞","m":"①身分 ②気品","c":"第二章 重要語（名詞）","g":"266"},{"id":"267","no":267,"t":"見","w":"ついで","k":"序","p":"名詞","m":"①順序・序列 ②機会・折","c":"第二章 重要語（名詞）","g":"267"},{"id":"267-1","t":"同","w":"しだい","k":"次第","p":"名詞","m":"順序","c":"第二章 重要語（名詞）","g":"267"},{"id":"268","no":268,"t":"見","w":"さた","k":"沙汰","p":"名詞","m":"①評議・裁き・処置 ②命令・指図 ③噂・評判","c":"第二章 重要語（名詞）","g":"268"},{"id":"269","no":269,"t":"見","w":"とが","k":"咎・科","p":"名詞","m":"①欠点・短所 ②過失・罪","c":"第二章 重要語（名詞）","g":"269"},{"id":"269-1","t":"関","w":"つみ","k":"罪","p":"名詞","m":"①罪 ②（罪を犯して受ける）罰","c":"第二章 重要語（名詞）","g":"269"},{"id":"270","no":270,"t":"見","w":"け","k":"故","p":"名詞","m":"①ゆえ・ため・せい〈原因・理由を表す〉","c":"第二章 重要語（名詞）","g":"270"},{"id":"271","no":271,"t":"見","w":"よし","k":"由","p":"名詞","m":"①（奥ゆかしい）趣・風情・様子・そぶり ②（家柄のよさなどの）由緒・由来 ③（何かをするための）手段・方法・手立て ④こと・旨","c":"第二章 重要語（名詞）","g":"271"},{"id":"271-1","t":"関","w":"ゆゑ","k":"故","p":"名詞","m":"①原因・理由 ②趣・風情 ③由緒・家柄","c":"第二章 重要語（名詞）","g":"271"},{"id":"271-2","t":"関","w":"よしあり・よしづく","k":"由あり・由づく","p":"動詞","m":"由緒・教養がある・風情がある","c":"第二章 重要語（名詞）","g":"271"},{"id":"271-3","t":"関","w":"よしばむ","k":"由ばむ","p":"動詞","m":"由緒ありげな振る舞いや様子をする","c":"第二章 重要語（名詞）","g":"271"},{"id":"272","no":272,"t":"見","w":"やう","k":"様","p":"名詞","m":"①様子・ありさま ②理由・わけ ③方法・手段 ④〈形式名詞として使われ〉〜ことには","c":"第二章 重要語（名詞）","g":"272"},{"id":"272-1","t":"同","w":"さま","k":"様","p":"名詞","m":"①様子・ありさま ②方法 ③方角","c":"第二章 重要語（名詞）","g":"272"},{"id":"273","no":273,"t":"見","w":"ちぎり","k":"契り","p":"名詞","m":"①約束〈言い交わすこと〉 ②前世からの約束・因縁・宿縁","c":"第二章 重要語（名詞）","g":"273"},{"id":"274","no":274,"t":"見","w":"ほだし","k":"絆","p":"名詞","m":"①束縛するもの・障害となるもの","c":"第二章 重要語（名詞）","g":"274"},{"id":"275","no":275,"t":"見","w":"あやめ","k":"文目","p":"名詞","m":"①（物の）模様・形・区別 ②（物事の）道理・筋道・分別","c":"第二章 重要語（名詞）","g":"275"},{"id":"275-1","t":"関","w":"あやなし","k":"文無し","p":"形容詞","m":"わけがわからない","c":"第二章 重要語（名詞）","g":"275"},{"id":"276","no":276,"t":"見","w":"うつつ","k":"現","p":"名詞","m":"①現実 ②正気〈意識の確かな状態〉","c":"第二章 重要語（名詞）","g":"276"},{"id":"277","no":277,"t":"見","w":"あるじ","k":"Ａ主／Ｂ饗","p":"名詞","m":"Ａ①主人　Ｂ②饗応・もてなし〈「あるじまうけ」の略〉","c":"第二章 重要語（名詞）","g":"277"},{"id":"278","no":278,"t":"見","w":"ふるさと","k":"古里・故郷","p":"名詞","m":"①なじみの土地〈昔住んでいた所・昔通っていた所〉 ②（家を離れた人にとって）わが家・自宅 ③旧都〈昔都があった所〉","c":"第二章 重要語（名詞）","g":"278"},{"id":"279","no":279,"t":"見","w":"さて","k":"然て","p":"副詞","m":"①そういう状態で・そのまま・そうして ②それ以外・そのほか","c":"第二章 重要語（副詞）","g":"279"},{"id":"279-1","t":"関","w":"さてしもあらず・さてしもあるべきことならず","k":"","p":"慣用句","m":"そのままにしてはおけない","c":"第二章 重要語（副詞）","g":"279"},{"id":"280","no":280,"t":"見","w":"さながら","k":"然ながら","p":"副詞","m":"①そのまま・もとのまま ②すべて・ことごとく・全部","c":"第二章 重要語（副詞）","g":"280"},{"id":"280-1","t":"同","w":"しかしながら","k":"","p":"副詞","m":"そっくりそのまま・すべて","c":"第二章 重要語（副詞）","g":"280"},{"id":"281","no":281,"t":"見","w":"いま","k":"今","p":"副詞","m":"①まもなく・すぐに ②（その上）さらに・もう","c":"第二章 重要語（副詞）","g":"281"},{"id":"281-1","t":"関","w":"いまはかぎり・いまはかく（いまはかう）","k":"今は限り・今はかく","p":"慣用句","m":"もはやこれまで","c":"第二章 重要語（副詞）","g":"281"},{"id":"281-2","t":"関","w":"いまめかし","k":"今めかし","p":"形容詞","m":"当世風だ・華やかだ","c":"第二章 重要語（副詞）","g":"281"},{"id":"282","no":282,"t":"見","w":"せめて","k":"","p":"副詞","m":"①無理に・強いて ②痛切に・切実に・ひどく","c":"第二章 重要語（副詞）","g":"282"},{"id":"283","no":283,"t":"見","w":"むべ・うべ","k":"宜","p":"副詞","m":"①なるほど・いかにも","c":"第二章 重要語（副詞）","g":"283"},{"id":"283-1","t":"関","w":"むべなり・うべなり","k":"","p":"形容動詞","m":"もっともだ","c":"第二章 重要語（副詞）","g":"283"},{"id":"284","no":284,"t":"見","w":"かつ","k":"","p":"副詞","m":"①一方では ②すぐに・たちまち","c":"第二章 重要語（副詞）","g":"284"},{"id":"284-1","t":"関","w":"はた","k":"","p":"副詞","m":"また・やはり","c":"第二章 重要語（副詞）","g":"284"},{"id":"285","no":285,"t":"見","w":"ひねもす","k":"終日","p":"副詞","m":"①一日中・朝から晩まで","c":"第二章 重要語（副詞）","g":"285"},{"id":"285-1","t":"同","w":"ひぐらし・ひひとひ","k":"日暮らし・日一日","p":"副詞・名詞","m":"一日中","c":"第二章 重要語（副詞）","g":"285"},{"id":"285-2","t":"反","w":"よもすがら・よひとよ","k":"夜もすがら・夜一夜","p":"副詞・名詞","m":"一晩中","c":"第二章 重要語（副詞）","g":"285"},{"id":"286","no":286,"t":"見","w":"かまへて（〜打消・禁止）","k":"構へて","p":"副詞","m":"①決して（〜ない・〜するな） ②〈意志・命令などの表現を伴い〉きっと・必ず・なんとかして","c":"第二章 重要語（副詞）","g":"286"},{"id":"287","no":287,"t":"見","w":"あへて（〜打消）","k":"敢へて","p":"副詞","m":"①まったく・少しも・決して（〜ない）","c":"第二章 重要語（副詞）","g":"287"},{"id":"288","no":288,"t":"見","w":"かけて（も）（〜打消）","k":"","p":"副詞","m":"①まったく・少しも・決して（〜ない）","c":"第二章 重要語（副詞）","g":"288"},{"id":"289","no":289,"t":"見","w":"さだめて（〜推量）","k":"定めて","p":"副詞","m":"①きっと・必ず（〜だろう）","c":"第二章 重要語（副詞）","g":"289"},{"id":"代1","t":"代","w":"ここ・これ・こなた・あれ・あ・われ・わ・おの・おのれ・まろ","k":"","p":"人称代名詞（自称・一人称）","m":"わたし・このわたし","c":"さまざまな代名詞（第二章末の表）","g":"代1"},{"id":"代2","t":"代","w":"そこ・ここ・それ・これ・そなた・ごへん・なれ・な・なんぢ・そち","k":"御辺・汝","p":"人称代名詞（対称・二人称）","m":"あなた","c":"さまざまな代名詞（第二章末の表）","g":"代2"},{"id":"代3","t":"代","w":"これ・こ","k":"","p":"人称代名詞（他称・近称）","m":"この人","c":"さまざまな代名詞（第二章末の表）","g":"代3"},{"id":"代4","t":"代","w":"それ・そ","k":"","p":"人称代名詞（他称・中称）","m":"その人","c":"さまざまな代名詞（第二章末の表）","g":"代4"},{"id":"代5","t":"代","w":"かれ・か・あれ・あ","k":"","p":"人称代名詞（他称・遠称）","m":"あの人","c":"さまざまな代名詞（第二章末の表）","g":"代5"},{"id":"代6","t":"代","w":"たれ・た・なにがし・それがし","k":"誰・某","p":"人称代名詞（不定称）","m":"だれ・だれそれ〈「なにがし」「それがし」は自称としても用いられる〉","c":"さまざまな代名詞（第二章末の表）","g":"代6"},{"id":"代7","t":"代","w":"これ・こ／それ・そ／かれ・か・あれ・あ／いづれ","k":"","p":"指示代名詞（事物）","m":"これ／それ／あれ／どれ","c":"さまざまな代名詞（第二章末の表）","g":"代7"},{"id":"代8","t":"代","w":"ここ／そこ／かしこ・あしこ／いづこ・いづく","k":"","p":"指示代名詞（場所）","m":"ここ／そこ／あそこ／どこ","c":"さまざまな代名詞（第二章末の表）","g":"代8"},{"id":"代9","t":"代","w":"こなた・こち／そなた・そち／あなた・かなた／いづち・いづかた","k":"","p":"指示代名詞（方向）","m":"こちら／そちら／あちら・向こう／どちら","c":"さまざまな代名詞（第二章末の表）","g":"代9"},{"id":"代10","t":"代","w":"いつ","k":"","p":"指示代名詞（時）","m":"いつ","c":"さまざまな代名詞（第二章末の表）","g":"代10"},{"id":"290","no":290,"t":"見","w":"のたまふ・のたまはす","k":"宣ふ・宣はす","p":"敬語動詞・ハ行四段／サ行下二段","m":"①おっしゃる〈「言ふ」の尊敬語〉","c":"敬語の章","g":"290"},{"id":"291","no":291,"t":"見","w":"おほす","k":"仰す","p":"敬語動詞・サ行下二段","m":"①命じる ②ご命令になる〈「命ず」の尊敬語〉 ③おっしゃる〈「言ふ」の尊敬語〉","c":"敬語の章","g":"291"},{"id":"291-1","t":"関","w":"おほせ","k":"仰せ","p":"名詞","m":"お言葉・ご命令","c":"敬語の章","g":"291"},{"id":"292","no":292,"t":"見","w":"きこゆ・きこえさす","k":"聞こゆ・聞こえさす","p":"敬語動詞・ヤ行下二段／サ行下二段","m":"①申し上げる〈「言ふ」の謙譲語〉 ②（お）〜申し上げる〈謙譲の補助動詞〉","c":"敬語の章","g":"292"},{"id":"292-1","t":"関","w":"きこゆ","k":"聞こゆ","p":"動詞","m":"①聞こえる ②評判になる ③分かる","c":"敬語の章","g":"292"},{"id":"293","no":293,"t":"見","w":"まうす","k":"申す","p":"敬語動詞・サ行四段","m":"①申し上げる〈「言ふ」の謙譲語〉 ②（お）〜申し上げる〈謙譲の補助動詞〉","c":"敬語の章","g":"293"},{"id":"294","no":294,"t":"見","w":"そうす","k":"奏す","p":"敬語動詞・サ行変格","m":"①（帝・上皇・法皇に）申し上げる〈「言ふ」の謙譲語〉","c":"敬語の章","g":"294"},{"id":"295","no":295,"t":"見","w":"けいす","k":"啓す","p":"敬語動詞・サ行変格","m":"①（中宮・東宮に）申し上げる〈「言ふ」の謙譲語〉","c":"敬語の章","g":"295"},{"id":"296","no":296,"t":"見","w":"うけたまはる","k":"承る","p":"敬語動詞・ラ行四段","m":"①お受けする・お聞きする〈「受く」「聞く」の謙譲語〉","c":"敬語の章","g":"296"},{"id":"297","no":297,"t":"見","w":"たまふ","k":"給ふ","p":"敬語動詞・Ａハ行四段／Ｂハ行下二段","m":"Ａ①お与えになる・下さる〈「与ふ」の尊敬語〉 ②〜なさる・お〜になる〈尊敬の補助動詞〉　Ｂ③〜（ており）ます〈謙譲の補助動詞〉","c":"敬語の章","g":"297"},{"id":"297-1","t":"同","w":"たぶ","k":"給ぶ","p":"動詞","m":"①お与えになる・下さる ②〜なさる・お〜になる","c":"敬語の章","g":"297"},{"id":"297-2","t":"同","w":"たうぶ","k":"給ぶ","p":"動詞","m":"①お与えになる・下さる ②〜なさる・お〜になる","c":"敬語の章","g":"297"},{"id":"298","no":298,"t":"見","w":"たまはす","k":"給はす・賜はす","p":"敬語動詞・サ行下二段","m":"①お与えになる・下さる〈「与ふ」の尊敬語〉","c":"敬語の章","g":"298"},{"id":"299","no":299,"t":"見","w":"たまはる","k":"賜はる・給はる","p":"敬語動詞・ラ行四段","m":"①いただく〈「受く」「もらふ」の謙譲語〉 ②お与えになる・下さる〈「与ふ」の尊敬語〉〈鎌倉時代以降の用法〉","c":"敬語の章","g":"299"},{"id":"300","no":300,"t":"見","w":"めす","k":"召す","p":"敬語動詞・サ行四段","m":"①（人を側に）お呼びになる〈「呼ぶ」の尊敬語〉 ②（物を側に）お取り寄せになる〈「取り寄す」の尊敬語〉 ③お召しになる〈「着る」の尊敬語〉 ④お乗りになる〈「乗る」の尊敬語〉 ⑤召し上がる〈「食ふ」「飲む」の尊敬語〉","c":"敬語の章","g":"300"},{"id":"300-1","t":"関","w":"つかはす","k":"遣はす","p":"動詞","m":"①（人や物を）おやりになる〈「遣る」の尊敬語〉 ②行かせる・やる〈尊敬語ではない〉","c":"敬語の章","g":"300"},{"id":"301","no":301,"t":"見","w":"おぼす・おぼしめす","k":"思す・思し召す","p":"敬語動詞・サ行四段","m":"①お思いになる〈「思ふ」の尊敬語〉","c":"敬語の章","g":"301"},{"id":"301-1","t":"同","w":"おもほす","k":"思ほす","p":"動詞","m":"お思いになる","c":"敬語の章","g":"301"},{"id":"302","no":302,"t":"見","w":"おほとのごもる","k":"大殿籠る","p":"敬語動詞・ラ行四段","m":"①おやすみになる〈「寝」「寝ぬ」の尊敬語〉","c":"敬語の章","g":"302"},{"id":"302-1","t":"同","w":"おんとのごもる","k":"御殿籠る","p":"動詞","m":"おやすみになる","c":"敬語の章","g":"302"},{"id":"303","no":303,"t":"見","w":"さぶらふ・さうらふ","k":"候ふ","p":"敬語動詞・ハ行四段","m":"①（貴人の側に）お仕え申し上げる・伺候する〈「仕ふ」の謙譲語〉 ②あります・おります〈「あり」「をり」の丁寧語〉 ③〜です・〜（でござい）ます〈丁寧の補助動詞〉","c":"敬語の章","g":"303"},{"id":"304","no":304,"t":"見","w":"はべり","k":"侍り","p":"敬語動詞・ラ行変格","m":"①（貴人の側に）お仕え申し上げる・伺候する〈「仕ふ」の謙譲語〉 ②あります・おります〈「あり」「をり」の丁寧語〉 ③〜です・〜（でござい）ます〈丁寧の補助動詞〉","c":"敬語の章","g":"304"},{"id":"305","no":305,"t":"見","w":"たてまつる","k":"奉る","p":"敬語動詞・ラ行四段","m":"①差し上げる〈「与ふ」の謙譲語〉 ②（お）〜申し上げる〈謙譲の補助動詞〉 ③お召しになる〈「着る」の尊敬語〉 ④召し上がる・お飲みになる〈「食ふ」「飲む」の尊敬語〉 ⑤お乗りになる〈「乗る」の尊敬語〉","c":"敬語の章","g":"305"},{"id":"306","no":306,"t":"見","w":"まゐらす","k":"参らす","p":"敬語動詞・サ行下二段","m":"①差し上げる〈「与ふ」の謙譲語〉 ②（お）〜申し上げる〈謙譲の補助動詞〉","c":"敬語の章","g":"306"},{"id":"307","no":307,"t":"見","w":"まゐる・まうづ","k":"参る・詣づ","p":"敬語動詞・ラ行四段／ダ行下二段","m":"①参上する〈「行く」「来」の謙譲語〉※「まうづ」は①の意味のみ ②（貴人に何かをして）差し上げる〈「与ふ」「す」の謙譲語〉 ③召し上がる〈「食ふ」「飲む」の尊敬語〉","c":"敬語の章","g":"307"},{"id":"308","no":308,"t":"見","w":"まかる・まかづ","k":"罷る・罷づ","p":"敬語動詞・ラ行四段／ダ行下二段","m":"①（貴所から）退出する〈「出づ」「行く」の謙譲語〉・（都から地方へ）赴く・下る ②出かけます・参ります〈「行く」の丁寧語〉 ③〈動詞の上につき、謙譲や丁寧の意を表す〉〈特に訳さなくてよい〉※「まかづ」には③の用法なし","c":"敬語の章","g":"308"},{"id":"309","no":309,"t":"見","w":"あそばす","k":"遊ばす","p":"敬語動詞・サ行四段","m":"①（何かを）なさる〈「す」の尊敬語〉","c":"敬語の章","g":"309"},{"id":"310","no":310,"t":"見","w":"つか（う）まつる","k":"仕（う）まつる","p":"敬語動詞・ラ行四段","m":"①お仕え申し上げる〈「仕ふ」の謙譲語〉 ②いたす・（何かを）し申し上げる〈「す」の謙譲語〉 ③（お）〜申し上げる〈謙譲の補助動詞〉","c":"敬語の章","g":"310"},{"id":"311","no":311,"t":"見","w":"きこしめす","k":"聞こし召す","p":"敬語動詞・サ行四段","m":"①お聞きになる〈「聞く」の尊敬語〉 ②召し上がる・お飲みになる〈「食ふ」「飲む」の尊敬語〉","c":"敬語の章","g":"311"},{"id":"312","no":312,"t":"見","w":"しろしめす","k":"","p":"敬語動詞・サ行四段","m":"①知っていらっしゃる〈「知る」の尊敬語〉 ②お治めになる〈「治める」という意の「知る・治る」の尊敬語〉","c":"敬語の章","g":"312"},{"id":"313","no":313,"t":"見","w":"おはす・おはします","k":"","p":"敬語動詞・サ行変格／サ行四段","m":"①いらっしゃる〈「あり」「行く」「来」の尊敬語〉 ②〜（て）いらっしゃる〈尊敬の補助動詞〉※「おはす」はサ行四段またはサ行下二段活用という説もある","c":"敬語の章","g":"313"},{"id":"314","no":314,"t":"見","w":"います・ます・まします／いますかり","k":"","p":"敬語動詞・サ行四段／ラ行変格","m":"①いらっしゃる〈「あり」「行く」「来」の尊敬語〉 ②〜（て）いらっしゃる〈尊敬の補助動詞〉※「いますがり」「いまそかり」「いまそがり」などの形もある","c":"敬語の章","g":"314"},{"id":"315","no":315,"t":"見","w":"ごらんず","k":"御覧ず","p":"敬語動詞・サ行変格","m":"①御覧になる〈「見る」の尊敬語〉","c":"敬語の章","g":"315"},{"id":"315-1","t":"関","w":"ごらんぜさす","k":"御覧ぜさす","p":"連語","m":"ご覧に入れる・お目に掛ける","c":"敬語の章","g":"315"},{"id":"慣1","t":"慣","w":"あかず","k":"飽かず","p":"慣用句","m":"①満足しない・もの足りない ②飽きることがない・名残惜しい","c":"慣用句の章","g":"慣1"},{"id":"慣1-1","t":"関","w":"あく","k":"飽く","p":"動詞","m":"①満足する・十分だと思う ②飽きる・いやになる","c":"慣用句の章","g":"慣1"},{"id":"慣1-2","t":"関","w":"あかなくに","k":"飽かなくに","p":"慣用句","m":"満足していないのに・名残惜しいのに","c":"慣用句の章","g":"慣1"},{"id":"慣2","t":"慣","w":"あからめもせず","k":"","p":"慣用句","m":"①よそ見もしない","c":"慣用句の章","g":"慣2"},{"id":"慣3","t":"慣","w":"あなかま","k":"","p":"慣用句","m":"①ああ、うるさい・静かに","c":"慣用句の章","g":"慣3"},{"id":"慣4","t":"慣","w":"あらぬ","k":"","p":"慣用句","m":"①別の","c":"慣用句の章","g":"慣4"},{"id":"慣5","t":"慣","w":"ありありて","k":"","p":"慣用句","m":"①生き続けて ②結局","c":"慣用句の章","g":"慣5"},{"id":"慣6","t":"慣","w":"ありし","k":"","p":"慣用句","m":"①以前の・あの ②生前の","c":"慣用句の章","g":"慣6"},{"id":"慣7","t":"慣","w":"ありつる","k":"","p":"慣用句","m":"①先程の・例の","c":"慣用句の章","g":"慣7"},{"id":"慣8","t":"慣","w":"あれかにもあらず","k":"","p":"慣用句","m":"①呆然としている","c":"慣用句の章","g":"慣8"},{"id":"慣8-1","t":"同","w":"われかにもあらず・あれかひとか・われかひとか","k":"","p":"慣用句","m":"呆然としている","c":"慣用句の章","g":"慣8"},{"id":"慣8-2","t":"関","w":"ものおぼえず","k":"","p":"慣用句","m":"呆然としている・茫然自失のさま","c":"慣用句の章","g":"慣8"},{"id":"慣9","t":"慣","w":"いかがはせむ","k":"","p":"慣用句","m":"①どうしようもない","c":"慣用句の章","g":"慣9"},{"id":"慣9-1","t":"同","w":"せむかたなし","k":"","p":"形容詞","m":"どうしようもない","c":"慣用句の章","g":"慣9"},{"id":"慣10","t":"慣","w":"いさ〜知らず","k":"","p":"慣用句","m":"①さあ、〜分からない","c":"慣用句の章","g":"慣10"},{"id":"慣11","t":"慣","w":"いざ（させ）給へ","k":"","p":"慣用句","m":"①さあいらっしゃい","c":"慣用句の章","g":"慣11"},{"id":"慣12","t":"慣","w":"いちのひと","k":"一の人","p":"慣用句","m":"①摂政・関白","c":"慣用句の章","g":"慣12"},{"id":"慣13","t":"慣","w":"いともなし","k":"","p":"慣用句","m":"①たいしたこともない","c":"慣用句の章","g":"慣13"},{"id":"慣13-1","t":"同","w":"いともあらず","k":"","p":"慣用句","m":"たいしたこともない","c":"慣用句の章","g":"慣13"},{"id":"慣14","t":"慣","w":"いはむかたなし","k":"言はむ方なし","p":"慣用句","m":"①言いようもない","c":"慣用句の章","g":"慣14"},{"id":"慣14-1","t":"同","w":"いふばかりなし・いふはかりなし","k":"言ふばかりなし・言ふはかりなし","p":"慣用句","m":"言いようもない","c":"慣用句の章","g":"慣14"},{"id":"慣15","t":"慣","w":"いふかひなし","k":"","p":"慣用句","m":"①言ってもかいがない ②つまらない・取るに足りない","c":"慣用句の章","g":"慣15"},{"id":"慣16","t":"慣","w":"〜（と）いふもおろかなり","k":"","p":"慣用句","m":"①（〜という言葉では）言い尽くせない","c":"慣用句の章","g":"慣16"},{"id":"慣16-1","t":"同","w":"〜（と）いへばおろかなり・〜などもおろかなり・〜とはおろかなり・〜（と）いふもなかなかなり・〜（と）いふもなべてなり","k":"","p":"慣用句","m":"（〜という言葉では）言い尽くせない","c":"慣用句の章","g":"慣16"},{"id":"慣16-2","t":"同","w":"〜（と）いふもよのつねなり・〜（と）いへばよのつねなり・〜とはよのつねなり・〜などもよのつねなり","k":"〜（と）言ふも世の常なり など","p":"慣用句","m":"（〜という言葉では）言い尽くせない〈「おろかなり」が「世の常なり」となったもの〉","c":"慣用句の章","g":"慣16"},{"id":"慣17","t":"慣","w":"いふもさらなり","k":"言ふも更なり","p":"慣用句","m":"①言うまでもない","c":"慣用句の章","g":"慣17"},{"id":"慣17-1","t":"同","w":"いへばさらなり・さらにもあらず・さらにもいはず","k":"","p":"慣用句","m":"言うまでもない","c":"慣用句の章","g":"慣17"},{"id":"慣18","t":"慣","w":"いろにいづ","k":"色に出づ","p":"慣用句","m":"①（こらえきれず）表情に出る","c":"慣用句の章","g":"慣18"},{"id":"慣19","t":"慣","w":"いをぬ","k":"寝を寝","p":"慣用句","m":"①寝る","c":"慣用句の章","g":"慣19"},{"id":"慣20","t":"慣","w":"えならず","k":"","p":"慣用句","m":"①言いようもなくすばらしい","c":"慣用句の章","g":"慣20"},{"id":"慣20-1","t":"同","w":"えもいはず","k":"","p":"慣用句","m":"言いようもなくすばらしい","c":"慣用句の章","g":"慣20"},{"id":"慣21","t":"慣","w":"おとにきく","k":"音に聞く","p":"慣用句","m":"①噂に聞く","c":"慣用句の章","g":"慣21"},{"id":"慣22","t":"慣","w":"かずならず","k":"数ならず","p":"慣用句","m":"①ものの数ではない・取るに足りない","c":"慣用句の章","g":"慣22"},{"id":"慣22-1","t":"同","w":"かずにもあらず","k":"","p":"慣用句","m":"ものの数ではない","c":"慣用句の章","g":"慣22"},{"id":"慣23","t":"慣","w":"くるしからず","k":"苦しからず","p":"慣用句","m":"①不都合ではない・差し支えない","c":"慣用句の章","g":"慣23"},{"id":"慣24","t":"慣","w":"けしきばかり","k":"","p":"慣用句","m":"①ほんの少し・形ばかり","c":"慣用句の章","g":"慣24"},{"id":"慣24-1","t":"同","w":"かことばかり・さまばかり","k":"","p":"慣用句","m":"ほんの少し・形ばかり","c":"慣用句の章","g":"慣24"},{"id":"慣25","t":"慣","w":"げんざんにいる","k":"見参に入る","p":"慣用句","m":"①（貴人に）お目にかかる ②（貴人に）お目にかける","c":"慣用句の章","g":"慣25"},{"id":"慣26","t":"慣","w":"こころあり＝なさけあり","k":"心あり＝情けあり","p":"慣用句","m":"①情趣を解する・風流心がある ②道理を解する・分別がある ③思いやりがある","c":"慣用句の章","g":"慣26"},{"id":"慣26-1","t":"反","w":"こころなし＝なさけなし","k":"","p":"慣用句","m":"情趣を解さない・分別がない・思いやりがない","c":"慣用句の章","g":"慣26"},{"id":"慣27","t":"慣","w":"こころおく","k":"心置く","p":"慣用句","m":"①心を留める・気にかける ②気がねする・遠慮する","c":"慣用句の章","g":"慣27"},{"id":"慣28","t":"慣","w":"こころのやみ","k":"心の闇","p":"慣用句","m":"①心の迷い ②分別を失った親心・思い乱れる親心","c":"慣用句の章","g":"慣28"},{"id":"慣29","t":"慣","w":"こころ（を）やる","k":"心（を）やる","p":"慣用句","m":"①気晴らしをする・心を慰める ②得意になる・満足する","c":"慣用句の章","g":"慣29"},{"id":"慣30","t":"慣","w":"こころゆく","k":"心ゆく","p":"慣用句","m":"①満足する・納得する ②気が晴れる","c":"慣用句の章","g":"慣30"},{"id":"慣31","t":"慣","w":"させる","k":"","p":"慣用句","m":"①たいした（〜ない）","c":"慣用句の章","g":"慣31"},{"id":"慣32","t":"慣","w":"さはれ・さばれ","k":"","p":"慣用句","m":"①どうとでもなれ・ええ、ままよ ②それはそうだが・しかし","c":"慣用句の章","g":"慣32"},{"id":"慣33","t":"慣","w":"さらでだに","k":"","p":"慣用句","m":"①そうでなくてさえ・ただでさえ","c":"慣用句の章","g":"慣33"},{"id":"慣33-1","t":"関","w":"さらずは・さらでは・さらでも","k":"","p":"慣用句","m":"そうでないならば・そうでなくては・そうでなくても","c":"慣用句の章","g":"慣33"},{"id":"慣34","t":"慣","w":"さらぬ","k":"Ａ然らぬ／Ｂ避らぬ","p":"慣用句","m":"Ａ①そうではない・それ以外の　Ｂ②避けられない","c":"慣用句の章","g":"慣34"},{"id":"慣35","t":"慣","w":"さるべき","k":"","p":"慣用句","m":"①そうなるはずの ②ふさわしい・適当な ③立派な・相当な（身分の）","c":"慣用句の章","g":"慣35"},{"id":"慣35-1","t":"同","w":"さりぬべき・しかるべき","k":"","p":"慣用句","m":"そうなるはずの・ふさわしい","c":"慣用句の章","g":"慣35"},{"id":"慣36","t":"慣","w":"さるべきにや（ありけむ）","k":"","p":"慣用句","m":"①そうなるはずの前世からの因縁であったのだろうか","c":"慣用句の章","g":"慣36"},{"id":"慣37","t":"慣","w":"さるものにて","k":"","p":"慣用句","m":"①言うまでもないことで・もちろん ②ともかくとして・一応もっともだが","c":"慣用句の章","g":"慣37"},{"id":"慣37-1","t":"同","w":"さることにて","k":"","p":"慣用句","m":"言うまでもないことで","c":"慣用句の章","g":"慣37"},{"id":"慣38","t":"慣","w":"さればよ","k":"","p":"慣用句","m":"①思ったとおりだ・案の定だ","c":"慣用句の章","g":"慣38"},{"id":"慣38-1","t":"同","w":"さればこそ","k":"","p":"慣用句","m":"思ったとおりだ","c":"慣用句の章","g":"慣38"},{"id":"慣39","t":"慣","w":"せきあへず","k":"塞き敢へず","p":"慣用句","m":"①（涙などを）せき止めきれない・我慢できない・こらえきれない","c":"慣用句の章","g":"慣39"},{"id":"慣40","t":"慣","w":"そのこととなく","k":"","p":"慣用句","m":"①これということもなく","c":"慣用句の章","g":"慣40"},{"id":"慣41","t":"慣","w":"そばめにかく","k":"","p":"慣用句","m":"①横目で見る ②軽く見る・馬鹿にする・冷たい目で見る","c":"慣用句の章","g":"慣41"},{"id":"慣42","t":"慣","w":"ただならずなる","k":"","p":"慣用句","m":"①懐妊する・妊娠する","c":"慣用句の章","g":"慣42"},{"id":"慣43","t":"慣","w":"ちからなし","k":"力なし","p":"慣用句","m":"①どうしようもない・しかたない・どうにもならない","c":"慣用句の章","g":"慣43"},{"id":"慣44","t":"慣","w":"ときしもあれ","k":"","p":"慣用句","m":"①ほかに時もあろうに・よりによってこんな時に","c":"慣用句の章","g":"慣44"},{"id":"慣45","t":"慣","w":"ときにあふ","k":"","p":"慣用句","m":"①ちょうどよい時期に出会う ②時流に乗って栄える・時めいている","c":"慣用句の章","g":"慣45"},{"id":"慣46","t":"慣","w":"ところう","k":"所得","p":"慣用句","m":"①よい地位を得る ②得意になる・いい気になる","c":"慣用句の章","g":"慣46"},{"id":"慣47","t":"慣","w":"とばかり","k":"","p":"慣用句","m":"①ちょっとの間・しばらく","c":"慣用句の章","g":"慣47"},{"id":"慣48","t":"慣","w":"なでふ・なんでふ・なんでう","k":"何条","p":"慣用句","m":"Ａ①なんという〈連体詞的用法〉　Ｂ②どうして〈副詞的用法〉","c":"慣用句の章","g":"慣48"},{"id":"慣49","t":"慣","w":"なに（し）おふ","k":"名に（し）負ふ","p":"慣用句","m":"①名前を持つ ②有名である","c":"慣用句の章","g":"慣49"},{"id":"慣50","t":"慣","w":"なに（に）か（は）せむ","k":"何（に）か（は）せむ","p":"慣用句","m":"①いったい何になろうか・何にもならない","c":"慣用句の章","g":"慣50"},{"id":"慣51","t":"慣","w":"ねをなく","k":"音を泣く","p":"慣用句","m":"①声を上げて泣く","c":"慣用句の章","g":"慣51"},{"id":"慣51-1","t":"同","w":"ねになく","k":"音に泣く","p":"慣用句","m":"声を上げて泣く","c":"慣用句の章","g":"慣51"},{"id":"慣52","t":"慣","w":"〜のがり","k":"","p":"慣用句","m":"①〜のもとへ","c":"慣用句の章","g":"慣52"},{"id":"慣53","t":"慣","w":"〜ばこそあらめ","k":"","p":"慣用句","m":"①〜ならばともかく〈実際はそうではない〉","c":"慣用句の章","g":"慣53"},{"id":"慣54","t":"慣","w":"ひととなる","k":"人となる","p":"慣用句","m":"①一人前になる・成人する ②正気に戻る","c":"慣用句の章","g":"慣54"},{"id":"慣54-1","t":"関","w":"をとこになる","k":"男になる","p":"慣用句","m":"男子が元服して一人前になる","c":"慣用句の章","g":"慣54"},{"id":"慣55","t":"慣","w":"ひとやりならず","k":"","p":"慣用句","m":"①他人からさせられるのではない・自分のせいである","c":"慣用句の章","g":"慣55"},{"id":"慣56","t":"慣","w":"またの","k":"","p":"慣用句","m":"①次の","c":"慣用句の章","g":"慣56"},{"id":"慣57","t":"慣","w":"〜ままに","k":"","p":"慣用句","m":"①〜（する）とすぐに・〜（する）やいなや ②〜ので ③〜につれて・〜に従って","c":"慣用句の章","g":"慣57"},{"id":"慣58","t":"慣","w":"むかしのひと","k":"昔の人","p":"慣用句","m":"①亡くなった人 ②昔の知人・昔なじみであった人","c":"慣用句の章","g":"慣58"},{"id":"慣59","t":"慣","w":"めもあやなり","k":"目もあやなり","p":"慣用句","m":"①まぶしいほど立派だ","c":"慣用句の章","g":"慣59"},{"id":"慣60","t":"慣","w":"〜やおそきと","k":"","p":"慣用句","m":"①〜（する）とすぐに","c":"慣用句の章","g":"慣60"},{"id":"慣61","t":"慣","w":"やらん","k":"","p":"慣用句","m":"①〜であろうか","c":"慣用句の章","g":"慣61"},{"id":"慣62","t":"慣","w":"やるかたなし","k":"","p":"慣用句","m":"①（心を）晴らしようがない・どうしようもない","c":"慣用句の章","g":"慣62"},{"id":"慣62-1","t":"同","w":"やらむかたなし","k":"","p":"慣用句","m":"（心を）晴らしようがない","c":"慣用句の章","g":"慣62"},{"id":"慣63","t":"慣","w":"よにあり","k":"世にあり","p":"慣用句","m":"①この世に生きている ②世間に認められている・世間で評判が高い","c":"慣用句の章","g":"慣63"},{"id":"慣64","t":"慣","w":"れいならず","k":"例ならず","p":"慣用句","m":"①いつもではない・普段と違う ②体調がいつもどおりでない・病気である・懐妊している","c":"慣用句の章","g":"慣64"},{"id":"慣65","t":"慣","w":"れいの","k":"例の","p":"慣用句","m":"①いつものように ②いつもの","c":"慣用句の章","g":"慣65"}];
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const LS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const pad=n=>String(n).padStart(3,'0');
+const meanLines=m=>esc(m).replace(/ ([②-⑩])/g,'\n$1').replace(/　(Ｂ|Ｃ)/g,'\n$1').split('\n');
+const fmtM=m=>meanLines(m).join('<br>');
+const fmtTime=s=>{s=Math.ceil(s);const m=Math.floor(s/60),r=s%60;return m?`${m}分${r?r+'秒':''}`:`${r}秒`;};
+const ICON={
+  close:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>',
+  lock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
+  star:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.8 2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8z"/></svg>',
+  play:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.9l10.5-6.5a1 1 0 0 0 0-1.7L9.5 4.6A1 1 0 0 0 8 5.5z"/></svg>',
+  book:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 21V5"/></svg>',
+  clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg>',
+  search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>',
+  flame:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 5.5 5 11a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5 0 2 1 3 2 3 0-3-1-6 1-9.5z"/></svg>',
+  test:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6M9 4a2 2 0 0 0-2 2H5v15h14V6h-2a2 2 0 0 0-2-2M8.5 13l2.5 2.5 4.5-5"/></svg>',
+  card:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="14" height="15" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v13"/></svg>',
+  list:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 5h2M4 12h2M4 19h2M10 5h10M10 12h10M10 19h10"/></svg>',
+};
+
+/* ===== データ ===== */
+const groups=[],gmap={};
+for(const r of DATA){ if(r.g===r.id){const g={head:r,rel:[]};groups.push(g);gmap[r.id]=g;} else gmap[r.g].rel.push(r); }
+let lastNo=0; for(const g of groups){ if(g.head.no) lastNo=g.head.no; g.pos=g.head.no||lastNo+.5; }
+const idioms=groups.filter(g=>g.head.t==='慣'); idioms.forEach((g,i)=>g.ki=i+1);
+const headOf=r=>gmap[r.g].head;
+const RELNAME={関:'関連語',同:'同義語',反:'反対語',類:'類義語'};
+function metaOf(r){
+  if(r.t==='見') return `No.${pad(r.no)}　${r.p}`;
+  if(r.t==='慣') return `慣用句　${r.p}`;
+  if(r.t==='言') return `言い換え　${r.p.replace(/^言い換え/,'')}`;
+  if(r.t==='代') return `代名詞表`;
+  const h=headOf(r); return `${h.no?pad(h.no)+' ':''}${h.w} の${RELNAME[r.t]}`;
+}
+
+/* ===== 学習記録 ===== */
+let known=new Set(LS.get('k315_known',[]));
+const today=()=>{const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();};
+let act=LS.get('k315_act',{days:[],date:'',n:0});
+function logStudy(){
+  const t=today(); if(act.date!==t){act.date=t;act.n=0;} act.n++;
+  if(!act.days.includes(t)){act.days.push(t); if(act.days.length>400) act.days=act.days.slice(-400);}
+  LS.set('k315_act',act);
+}
+function streak(){
+  const set=new Set(act.days); let n=0; const d=new Date();
+  if(!set.has(today())) d.setDate(d.getDate()-1);
+  for(;;){const k=d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(); if(set.has(k)){n++;d.setDate(d.getDate()-1);} else break;}
+  return n;
+}
+function mark(r,ok){ if(ok) known.add(r.id); else known.delete(r.id); LS.set('k315_known',[...known]); logStudy(); }
+function toast(msg){ const t=document.createElement('div'); t.className='toast'; t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),1800); }
+
+/* ===== ステップアップ定義 ===== */
+const CLEAR_RATE=.8, SEC=2.5, CHUNK=20;
+const SECTIONS=[
+  {grp:'第一章 最重要語',name:'動詞',a:1,b:38},{grp:'第一章 最重要語',name:'形容詞',a:39,b:82},
+  {grp:'第一章 最重要語',name:'形容動詞',a:83,b:96},{grp:'第一章 最重要語',name:'名詞',a:97,b:127},
+  {grp:'第一章 最重要語',name:'副詞',a:128,b:163},{grp:'第一章 最重要語',exam:'章末テスト',a:1,b:163,n:[30,40]},
+  {grp:'第二章 重要語',name:'動詞',a:164,b:192},{grp:'第二章 重要語',name:'形容詞',a:193,b:228},
+  {grp:'第二章 重要語',name:'形容動詞',a:229,b:241},{grp:'第二章 重要語',name:'名詞',a:242,b:278},
+  {grp:'第二章 重要語',name:'副詞',a:279,b:289},{grp:'第二章 重要語',exam:'章末テスト',a:164,b:289,n:[30,40]},
+  {grp:'敬語の章',name:'敬語',a:290,b:315},{grp:'敬語の章',exam:'章末テスト',a:290,b:315,n:[20,30]},
+  {grp:'慣用句の章',name:'慣用句',idiom:true,a:1,b:65},{grp:'慣用句の章',exam:'章末テスト',idiom:true,a:1,b:65,n:[25,30]},
+  {grp:'総まとめ',exam:'総まとめテスト',all:true,n:[50,70]},
+];
+const STAGES=[];
+for(const s of SECTIONS){
+  if(s.exam){STAGES.push({id:'x:'+s.grp+s.exam,grp:s.grp,name:s.exam,exam:true,sec:s});continue;}
+  const cnt=s.b-s.a+1,k=Math.ceil(cnt/CHUNK),size=Math.ceil(cnt/k);
+  for(let i=0;i<k;i++){const a=s.a+i*size,b=Math.min(s.b,a+size-1);
+    STAGES.push({id:(s.idiom?'k':'n')+a+'-'+b,grp:s.grp,name:s.name+(k>1?' '+'①②③④⑤'[i]:''),range:s.idiom?`慣用句 ${a}〜${b}`:`No.${a}〜${b}`,sec:{...s,a,b}});}
+}
+function stageGroups(sec){
+  if(sec.all) return groups.filter(g=>g.head.t!=='代');
+  if(sec.idiom) return idioms.filter(g=>g.ki>=sec.a&&g.ki<=sec.b);
+  return groups.filter(g=>(g.head.t==='見'&&g.head.no>=sec.a&&g.head.no<=sec.b)||(g.head.t==='言'&&g.pos>=sec.a&&g.pos<=sec.b+.5));
+}
+function stageItems(st,round){const out=[];for(const g of stageGroups(st.sec)){ if(round===1){if(g.head.t!=='言')out.push(g.head);} else out.push(g.head,...g.rel);} return out;}
+const qCount=(st,r)=>{const n=stageItems(st,r).length;return st.exam?Math.min(st.sec.n[r===1?0:1],n):n;};
+let prog=LS.get('k315_step',{round:1,cleared:{}});
+const saveProg=()=>LS.set('k315_step',prog);
+const clearedOf=r=>prog.cleared[r]||(prog.cleared[r]={});
+let viewRound=prog.round;
+function stageState(i,r){const c=clearedOf(r),st=STAGES[i];if(c[st.id]!==undefined)return'cleared';if(i===0||c[STAGES[i-1].id]!==undefined)return'open';return'locked';}
+function nextStageIndex(r){for(let i=0;i<STAGES.length;i++) if(stageState(i,r)==='open') return i; return -1;}
+
+/* ===== 範囲設定 ===== */
+const PRESETS=[['全部',1,315],['第一章',1,163],['動詞',1,38],['形容詞',39,82],['形容動詞',83,96],['名詞',97,127],['副詞',128,163],['第二章',164,289],['二・動詞',164,192],['二・形容詞',193,228],['二・形容動詞',229,241],['二・名詞',242,278],['二・副詞',279,289],['敬語',290,315]];
+let cfg=Object.assign({from:1,to:315,incHead:true,incRel:true,incIdiom:true,incIkae:true,incExtra:false,onlyNg:false,qnum:20,timed:true,shuffle:true,reverse:false},LS.get('k315_cfg',{}));
+const saveCfg=()=>LS.set('k315_cfg',cfg);
+function inRange(g){
+  const a=+cfg.from||1,b=+cfg.to||315,t=g.head.t;
+  if(t==='見') return g.head.no>=a&&g.head.no<=b;
+  if(t==='慣') return cfg.incIdiom;
+  if(t==='言') return cfg.incIkae&&g.pos>=a&&g.pos<=b+.5;
+  return cfg.incExtra&&g.pos>=a&&g.pos<=b+.5;
+}
+function pool(){const out=[];for(const g of groups){if(!inRange(g))continue;if(g.head.t!=='見'||cfg.incHead)out.push(g.head);if(cfg.incRel)out.push(...g.rel);}return cfg.onlyNg?out.filter(r=>!known.has(r.id)):out;}
+
+/* ===== 画面 ===== */
+const app=$('#app'); let tab='home', timerId=null;
+function stopTimer(){if(timerId){clearInterval(timerId);timerId=null;}}
+function setTab(t){
+  stopTimer(); tab=t; app.classList.remove('focus'); $('#tabbar').hidden=false;
+  $$('.tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));
+  ({home:renderHome,step:renderStep,test:()=>renderSetup('test'),card:()=>renderSetup('card'),list:renderList})[t]();
+  window.scrollTo(0,0);
+}
+function focusMode(){ stopTimer(); app.classList.add('focus'); $('#tabbar').hidden=true; window.scrollTo(0,0); }
+$$('.tab').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
+function ringSVG(p,size,stroke,color,track){
+  const r=(size-stroke)/2,c=2*Math.PI*r;
+  return `<svg viewBox="0 0 ${size} ${size}"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${track}" stroke-width="${stroke}"/><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${color}" stroke-width="${stroke}" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c*(1-Math.min(1,p))}"/></svg>`;
+}
+
+/* --- ホーム --- */
+function renderHome(){
+  const heads=DATA.filter(r=>r.t==='見'), hk=heads.filter(r=>known.has(r.id)).length;
+  const ni=nextStageIndex(prog.round), st=ni>=0?STAGES[ni]:null;
+  const cleared=STAGES.filter(s=>clearedOf(prog.round)[s.id]!==undefined).length;
+  const pick=heads[(new Date().getDate()*37+new Date().getMonth()*11)%heads.length];
+  app.innerHTML=`
+  <div class="lh"><div class="grow"><div class="eyebrow">KOBUN TANGO 315</div><h1>古文単語315</h1></div></div>
+  <div class="hero">
+    <div class="ring">${ringSVG(hk/315,96,9,'var(--gold)','color-mix(in srgb,var(--on-hero) 18%,transparent)')}<div class="rv"><div><b class="num">${hk}</b><small>/ 315 見出し語</small></div></div></div>
+    <div class="hstats">
+      <div class="hstat"><div class="k">連続学習</div><div class="v num">${streak()}<small>日</small></div></div>
+      <div class="hstat"><div class="k">今日の解答</div><div class="v num">${act.date===today()?act.n:0}<small>語</small></div></div>
+      <div class="hstat wide"><div class="k">覚えた語（関連語・慣用句を含む）</div><div class="v num">${known.size}<small>/ ${DATA.length}</small></div></div>
+    </div>
+  </div>
+  <button class="cont" id="cont"><span class="ci">${ICON.play}</span><span class="ct">
+    <span class="k">ステップアップ ${prog.round}周目・${cleared}/${STAGES.length}クリア</span>
+    <div class="v">${st?esc(st.grp.replace(/ .*/,''))+'　'+esc(st.name):'全ステージクリア'}</div>
+    <span class="s">${st?(st.range?esc(st.range)+'・':'')+qCount(st,prog.round)+'問・'+fmtTime(qCount(st,prog.round)*SEC):'次の周に進めます'}</span></span></button>
+  <div class="sec-t">モードを選ぶ</div>
+  <div class="modes">
+    <button class="mode" data-go="test"><span class="mi">${ICON.test}</span><b>テスト</b><span>範囲を選んで4択</span></button>
+    <button class="mode" data-go="card"><span class="mi">${ICON.card}</span><b>暗記カード</b><span>スワイプで仕分け</span></button>
+    <button class="mode" data-go="list"><span class="mi">${ICON.list}</span><b>単語一覧</b><span>掲載順に確認</span></button>
+  </div>
+  <div class="sec-t">今日の一語</div>
+  <div class="wod"><div class="vw">${esc(pick.w)}</div><div class="wm"><div class="k">No.${pad(pick.no)}　${esc(pick.p)}${pick.k?'　〔'+esc(pick.k)+'〕':''}</div>${fmtM(pick.m)}</div></div>`;
+  $('#cont').onclick=()=>{ if(st){viewRound=prog.round; setTab('step'); openSheet(ni);} else setTab('step'); };
+  $$('[data-go]').forEach(b=>b.onclick=()=>setTab(b.dataset.go));
+}
+
+/* --- ステップアップ --- */
+function renderStep(){
+  const r=viewRound,c=clearedOf(r),ni=nextStageIndex(r);
+  let html=`<div class="lh"><div class="grow"><div class="eyebrow">STEP UP</div><h1>ステップアップ</h1></div></div>
+  <div class="rounds">${Array.from({length:prog.round},(_,i)=>`<button class="chip${i+1===r?' on':''}" data-r="${i+1}">${i+1}周目</button>`).join('')}</div>
+  <div class="rnote">${r===1?'1周目は<b>見出し語だけ</b>を出題。総まとめテストをクリアすると2周目（関連語・類義語・反対語・言い換えも出題）が始まります。':`${r}周目は<b>見出し語＋関連語・同義語・反対語・類義語・言い換え</b>を出題します。`}<br>クリア条件：1問2.5秒の制限時間内に全問答えて、8割以上正解。</div>`;
+  let lastG='',k=0;
+  STAGES.forEach((st,i)=>{
+    if(st.grp!==lastG){
+      const inG=STAGES.filter(s=>s.grp===st.grp),done=inG.filter(s=>c[s.id]!==undefined).length;
+      html+=(lastG?'</div>':'')+`<div class="unit"><div class="ut"><div class="k">${st.grp==='総まとめ'?'FINAL':'UNIT'}</div><div class="v">${esc(st.grp)}</div></div><span class="uc num">${done}/${inG.length}</span></div><div class="path">`;
+      lastG=st.grp;k=0;
+    }
+    const state=stageState(i,r),off=[0,-60,-90,-60,0,60,90,60][k%8];k++;
+    const icon=state==='locked'?ICON.lock:state==='cleared'?(st.exam?ICON.star:ICON.check):(st.exam?ICON.star:ICON.book);
+    html+=`<div class="node-row"><button class="node ${state}${st.exam?' exam':''}${i===ni?' current':''}" data-i="${i}" style="transform:translateX(${off}px)" ${state==='locked'?'aria-disabled="true"':''}>
+      ${i===ni?'<span class="here">ここから</span>':''}${state==='cleared'?`<span class="best num">${c[st.id]}%</span>`:''}
+      <span class="nb">${icon}</span><span class="nl">${esc(st.name)}<small>${st.range?esc(st.range):qCount(st,r)+'問'}</small></span></button></div>`;
+  });
+  app.innerHTML=html+'</div>';
+  $$('.rounds .chip').forEach(b=>b.onclick=()=>{viewRound=+b.dataset.r;renderStep();});
+  $$('.node').forEach(b=>b.onclick=()=>{ const i=+b.dataset.i; if(stageState(i,viewRound)==='locked'){toast('前のステージをクリアすると解放されます');return;} openSheet(i); });
+  const cur=$('.node.current'); if(cur) setTimeout(()=>cur.scrollIntoView({block:'center',behavior:'smooth'}),60);
+}
+function openSheet(i){
+  const st=STAGES[i],r=viewRound,items=stageItems(st,r),n=qCount(st,r),need=Math.ceil(n*CLEAR_RATE),best=clearedOf(r)[st.id];
+  const sc=document.createElement('div'); sc.className='scrim';
+  sc.innerHTML=`<div class="sheet" role="dialog" aria-label="${esc(st.name)}"><div class="grab"></div>
+    <div class="k">${esc(st.grp)}・${r}周目${st.range?'・'+esc(st.range):''}</div>
+    <h2>${esc(st.name)}</h2>
+    <div class="facts"><div class="fact"><div class="v num">${n}</div><div class="k">問題数</div></div><div class="fact"><div class="v">${fmtTime(n*SEC)}</div><div class="k">制限時間</div></div><div class="fact"><div class="v num">${need}</div><div class="k">合格ライン</div></div></div>
+    <p style="font-size:13px;color:var(--sub);margin:0 0 14px;line-height:1.7">${r===1?'見出し語のみ':'見出し語＋関連語など'}${st.exam?`。範囲の${items.length}語からランダムに出題します`:''}。答えを表示している間はタイマーが止まります。${best!==undefined?`<br>ベスト記録：${best}%`:''}</p>
+    <button class="btn pri" id="sGo">${ICON.play}テストを始める</button>
+    ${st.exam?'':`<button class="btn" id="sCard">${ICON.card}先にカードで覚える（${items.length}語）</button>`}
+  </div>`;
+  document.body.appendChild(sc);
+  const close=()=>sc.remove();
+  sc.onclick=e=>{if(e.target===sc)close();};
+  sc.querySelector('#sGo').onclick=()=>{close();runStage(i);};
+  if(!st.exam) sc.querySelector('#sCard').onclick=()=>{close();startCards(items,{title:st.name+'・予習',shuffle:false,forward:true,exit:()=>setTab('step'),next:()=>runStage(i),nextLabel:'テストに挑戦'});};
+}
+function runStage(i){
+  const st=STAGES[i],r=viewRound,all=stageItems(st,r);
+  const items=shuffle(all.slice()).slice(0,qCount(st,r));
+  startQuiz({items,timed:true,title:st.name,exit:()=>setTab('step'),onFinish:res=>{
+    const pct=Math.round(res.ok/res.total*100), clear=!res.timeUp&&res.ok>=Math.ceil(res.total*CLEAR_RATE);
+    let note='';
+    if(clear){ const c=clearedOf(r); c[st.id]=Math.max(c[st.id]||0,pct);
+      if(i===STAGES.length-1&&r===prog.round){prog.round++;note=`全ステージクリア！ ${prog.round}周目が解放されました。次の周からは関連語も出題されます。`;}
+      saveProg(); }
+    else note=res.timeUp?'時間切れ。1問2.5秒のペースを目指しましょう。':`合格ラインは${Math.ceil(res.total*CLEAR_RATE)}問です。`;
+    const last=i===STAGES.length-1;
+    showResult(res,{title:st.name,clear,note,again:()=>runStage(i),exit:()=>setTab('step'),
+      next:clear?(last?()=>{viewRound=prog.round;setTab('step');}:()=>{setTab('step');openSheet(i+1);}):null,
+      nextLabel:last?'次の周へ':'次のステージへ'});
+  }});
+}
+
+/* --- 範囲設定（テスト／カード） --- */
+function sw(id,title,sub){return `<label class="sw" for="c-${id}"><span class="t">${title}${sub?`<small>${sub}</small>`:''}</span><input type="checkbox" id="c-${id}" ${cfg[id]?'checked':''}><span class="tg"></span></label>`;}
+function renderSetup(m){
+  const isTest=m==='test';
+  app.innerHTML=`<div class="lh"><div class="grow"><div class="eyebrow">${isTest?'TEST':'FLASH CARDS'}</div><h1>${isTest?'テスト':'暗記カード'}</h1></div></div>
+  <div class="gtitle">範囲</div>
+  <div class="group">
+    <div class="presets">${PRESETS.map(([t,a,b])=>`<button class="chip${+cfg.from===a&&+cfg.to===b?' on':''}" data-a="${a}" data-b="${b}">${t}</button>`).join('')}</div>
+    <div class="rangebox"><label for="c-from">No.</label><input type="number" id="c-from" min="1" max="315" value="${cfg.from}"><span>〜</span><input type="number" id="c-to" min="1" max="315" value="${cfg.to}"></div>
+  </div>
+  <div class="gtitle">出題する語</div>
+  <div class="group">
+    ${sw('incHead','見出し語','No.1〜315')}${sw('incRel','関連語・同義語・反対語・類義語','見出し語の下に載っている語')}${sw('incIdiom','慣用句の章','65項目と関連表現')}${sw('incIkae','言い換え','死ぬ・出家する')}${sw('incExtra','代名詞表','第二章末の表')}${sw('onlyNg','まだ覚えていない語だけ','')}
+  </div>
+  <div class="gtitle">${isTest?'テストの設定':'カードの設定'}</div>
+  <div class="group">
+    ${isTest?`<div class="segrow" style="border-top:0"><div class="t">問題数</div><div class="seg" id="qnum">${[10,20,30,50,0].map(n=>`<button data-n="${n}" class="${+cfg.qnum===n?'on':''}">${n?n+'問':'全部'}</button>`).join('')}</div></div>${sw('timed','制限時間','1問2.5秒・答えの表示中は止まる')}`
+      :`${sw('shuffle','シャッフル','')}${sw('reverse','意味から単語を答える','')}`}
+  </div>
+  <div class="poolc" id="poolc"></div>
+  <div class="startbar"><button class="btn pri" id="go">${ICON.play}スタート</button></div>`;
+  const upd=()=>{saveCfg();const n=pool().length;$('#poolc').textContent=`この範囲で ${n} 語`;$$('.presets .chip').forEach(c=>c.classList.toggle('on',+c.dataset.a===+cfg.from&&+c.dataset.b===+cfg.to));};
+  $$('.presets .chip').forEach(c=>c.onclick=()=>{cfg.from=+c.dataset.a;cfg.to=+c.dataset.b;$('#c-from').value=cfg.from;$('#c-to').value=cfg.to;upd();});
+  $('#c-from').onchange=e=>{cfg.from=Math.max(1,Math.min(315,+e.target.value||1));upd();};
+  $('#c-to').onchange=e=>{cfg.to=Math.max(1,Math.min(315,+e.target.value||315));upd();};
+  $$('.sw input').forEach(i=>i.onchange=()=>{cfg[i.id.slice(2)]=i.checked;upd();});
+  if(isTest) $$('#qnum button').forEach(b=>b.onclick=()=>{cfg.qnum=+b.dataset.n;$$('#qnum button').forEach(x=>x.classList.toggle('on',x===b));upd();});
+  $('#go').onclick=()=>{
+    const p=pool(); if(!p.length){toast('この範囲には単語がありません');return;}
+    if(isTest){const items=shuffle(p.slice()).slice(0,+cfg.qnum||p.length);
+      const run=()=>startQuiz({items:shuffle(items.slice()),timed:cfg.timed,title:'テスト',exit:()=>setTab('test'),onFinish:res=>showResult(res,{title:'テスト',note:'',again:run,exit:()=>setTab('test')})});run();}
+    else startCards(p,{title:'暗記カード',shuffle:cfg.shuffle,exit:()=>setTab('card')});
+  };
+  upd();
+}
+
+/* --- 一覧 --- */
+let listQ='',hideM=false;
+function renderList(){
+  app.innerHTML=`<div class="lh"><div class="grow"><div class="eyebrow">WORD LIST</div><h1>単語一覧</h1></div></div>
+  <div class="search"><div class="sb">${ICON.search}<input type="search" id="lq" placeholder="単語・漢字・意味で検索" value="${esc(listQ)}"></div><button class="togglebtn${hideM?' on':''}" id="lh">意味を隠す</button></div>
+  <div class="presets" style="padding:0 0 4px">${[['すべて',0],['第一章',1],['第二章',164],['敬語',290],['慣用句','k'],['言い換え','l'],['代名詞','p']].map(([t,v])=>`<button class="chip" data-j="${v}">${t}</button>`).join('')}</div>
+  <div id="lbody"></div>`;
+  $('#lq').oninput=e=>{listQ=e.target.value;drawList();};
+  $('#lh').onclick=e=>{hideM=!hideM;e.target.classList.toggle('on',hideM);drawList();};
+  $$('[data-j]').forEach(b=>b.onclick=()=>{const v=b.dataset.j;let sel;
+    if(v==='0'){window.scrollTo({top:0,behavior:'smooth'});return;}
+    sel=v==='k'?'[data-g="慣1"]':v==='l'?'[data-g="言1"]':v==='p'?'[data-g="代1"]':`[data-g="${v}"]`;
+    const el=$(sel); if(el) window.scrollTo({top:el.getBoundingClientRect().top+scrollY-120,behavior:'smooth'});});
+  drawList();
+}
+function drawList(){
+  const q=listQ.trim(),match=r=>!q||(r.w+r.k+r.m+r.p).includes(q);
+  const out=[];let lastC='';
+  for(const g of groups){
+    const hh=match(g.head),rh=g.rel.filter(match); if(!hh&&!rh.length) continue;
+    if(g.head.c!==lastC){out.push(`<div class="lchap">${esc(g.head.c)}</div>`);lastC=g.head.c;}
+    const h=g.head,d=known.has(h.id),rs=q&&!hh?rh:g.rel;
+    const no=h.t==='見'?`<span class="n">${pad(h.no)}</span>`:`<span class="n tagged">${h.t}</span>`;
+    out.push(`<div class="ent${d?' done':''}" data-g="${h.id}"><div class="eno">${no}<button class="chk" data-id="${h.id}" aria-label="覚えた">${ICON.check}</button></div>
+      <div class="eh"><span class="w">${esc(h.w)}</span>${h.k?`<span class="kj">〔${esc(h.k)}〕</span>`:''}<span class="pos">${esc(h.p)}</span></div>
+      <div class="m">${fmtM(h.m)}</div>
+      ${rs.length?`<div class="rel">${rs.map(r=>`<div class="r"><span class="tag ${r.t}">${r.t}</span><span class="rw">${esc(r.w)}</span><span class="rm">${esc(r.m)}</span></div>`).join('')}</div>`:''}</div>`);
+  }
+  const lb=$('#lbody'); lb.className=hideM?'hide-m':''; lb.innerHTML=out.join('')||'<div class="empty">見つかりませんでした</div>';
+  lb.onclick=e=>{
+    const b=e.target.closest('.chk');
+    if(b){const g=gmap[b.dataset.id],ids=[g.head.id,...g.rel.map(r=>r.id)],on=!known.has(g.head.id);
+      ids.forEach(i=>on?known.add(i):known.delete(i));LS.set('k315_known',[...known]);b.closest('.ent').classList.toggle('done',on);return;}
+    const m=e.target.closest('.m,.rm'); if(m&&hideM) m.classList.toggle('show');
+  };
+}
+
+/* --- 暗記カード --- */
+let deck=[],di=0,dopt={};
+function startCards(items,opt){ deck=items.slice(); if(opt.shuffle) shuffle(deck); di=0; dopt=opt; focusMode(); drawCard(); }
+function drawCard(){
+  const rev=!dopt.forward&&cfg.reverse;
+  if(di>=deck.length){
+    app.innerHTML=`<div class="fbar"><button class="iconbtn" id="x" aria-label="閉じる">${ICON.close}</button><div class="ft">${esc(dopt.title)}</div></div>
+    <div class="res"><div class="ring">${ringSVG(1,160,12,'var(--gold)','var(--line)')}<div class="rv"><div><b class="num">${deck.length}</b><small>語</small></div></div></div>
+    <h2>一周しました</h2><p>「まだ」の語はもう一周すると覚えやすくなります</p></div>
+    <div style="margin-top:20px">${dopt.next?`<button class="btn pri" id="nx">${esc(dopt.nextLabel)}</button>`:''}<button class="btn" id="ag">もう一周</button><button class="btn" id="ng">「まだ」の語だけもう一周</button></div>`;
+    $('#x').onclick=dopt.exit; $('#ag').onclick=()=>startCards(deck,dopt);
+    $('#ng').onclick=()=>{const n=deck.filter(r=>!known.has(r.id)); if(!n.length){toast('全部「覚えた」になっています');return;} startCards(n,dopt);};
+    if(dopt.next) $('#nx').onclick=dopt.next; return;
+  }
+  const r=deck[di],nx=deck[di+1];
+  const word=(x)=>{const vert=x.w.length<=9&&!/[・（／]/.test(x.w);return `${vert?`<div class="vw">${esc(x.w)}</div>`:`<div class="hw">${esc(x.w)}</div>`}${x.k?`<div class="kj">〔${esc(x.k)}〕</div>`:''}`;};
+  const meaning=x=>`<div class="bm">${meanLines(x.m).map(l=>`<div>${l}</div>`).join('')}</div>`;
+  const front=rev?`<div class="bm" style="text-align:center">${fmtM(r.m)}</div>`:word(r);
+  const back=rev?`<div style="margin:auto;text-align:center">${word(r)}</div>`:`<div class="bw">${esc(r.w)}${r.k?` <span style="font-size:14px;color:var(--sub);font-weight:500">〔${esc(r.k)}〕</span>`:''}</div>${meaning(r)}`;
+  app.innerHTML=`<div class="fbar"><button class="iconbtn" id="x" aria-label="閉じる">${ICON.close}</button><div class="track gold"><i style="width:${di/deck.length*100}%"></i></div><span class="num" style="font-size:13px;color:var(--sub)">${di+1}/${deck.length}</span></div>
+  <div class="stack">
+    ${nx?`<div class="fc ghost"><div class="inner"><div class="face"></div></div></div>`:''}
+    <div class="fc" id="fc"><div class="inner">
+      <div class="face"><div class="meta"><span>${esc(metaOf(r))}</span><span>${known.has(r.id)?'✓ 覚えた':''}</span></div>${front}<div class="tap">タップでめくる</div><span class="stamp ok">覚えた</span><span class="stamp ng">まだ</span></div>
+      <div class="face back"><div class="meta"><span>${esc(metaOf(r))}</span></div>${back}</div>
+    </div></div>
+  </div>
+  <div class="swipehint"><span>← まだ</span><span>覚えた →</span></div>
+  <div class="cardbtns"><button class="btn ngb" id="bn">まだ</button><button class="btn okb" id="bo">覚えた</button></div>`;
+  $('#x').onclick=dopt.exit; $('#bn').onclick=()=>cardGo(false); $('#bo').onclick=()=>cardGo(true);
+  const fc=$('#fc'); let sx=0,dx=0,down=false,moved=false;
+  fc.addEventListener('pointerdown',e=>{down=true;moved=false;sx=e.clientX;dx=0;fc.style.transition='none';});
+  fc.addEventListener('pointermove',e=>{if(!down)return;dx=e.clientX-sx;if(Math.abs(dx)>6){moved=true;fc.setPointerCapture?.(e.pointerId);}
+    fc.style.transform=`translateX(${dx}px) rotate(${dx/18}deg)`;
+    fc.querySelector('.stamp.ok').style.opacity=Math.max(0,Math.min(1,dx/90));fc.querySelector('.stamp.ng').style.opacity=Math.max(0,Math.min(1,-dx/90));});
+  const end=()=>{if(!down)return;down=false;fc.style.transition='transform .25s';
+    if(Math.abs(dx)>90){cardGo(dx>0);return;}
+    fc.style.transform='';fc.querySelectorAll('.stamp').forEach(s=>s.style.opacity=0);
+    if(!moved) fc.classList.toggle('flip');};
+  fc.addEventListener('pointerup',end); fc.addEventListener('pointercancel',end);
+}
+function cardGo(ok){
+  const fc=$('#fc'); if(!fc||fc.dataset.gone) return; fc.dataset.gone=1;
+  mark(deck[di],ok);
+  fc.style.transition='transform .28s ease-in,opacity .28s';fc.style.transform=`translateX(${ok?420:-420}px) rotate(${ok?18:-18}deg)`;fc.style.opacity=0;
+  setTimeout(()=>{di++;drawCard();},230);
+}
+
+/* --- 4択テスト --- */
+let quiz=null;
+// 訳語を①②…ごとに分割し、比較用のキーワードも作る
+function sensesOf(r){
+  if(r._s) return r._s;
+  let m=r.m.replace(/※.*$/,'').trim();
+  let parts=m.split(/(?=[①-⑩])/).map(x=>x.replace(/^[　\s]*[ＡＢＣ]?[　\s]*/,'').replace(/^[①-⑩]/,'').replace(/[　\s]*[ＡＢＣ]$/,'').trim()).filter(Boolean);
+  if(!parts.length) parts=[m];
+  parts=parts.map(t=>t.replace(/〈現代語と同じ〉/g,'').trim());
+  return r._s=parts.map(txt=>({txt,keys:keysOf(txt)}));
+}
+function keysOf(t){
+  const base=t.replace(/〈[^〉]*〉/g,'').replace(/（[^）]*）/g,'').replace(/\([^)]*\)/g,'');
+  return base.split(/[・、／,]/).map(x=>x.replace(/[〜～\s　]/g,'')).filter(x=>x.length>=2);
+}
+const overlap=(a,b)=>a.keys.some(k=>b.keys.some(j=>k===j||(k.length>=3&&j.includes(k))||(j.length>=3&&k.includes(j))))||a.txt===b.txt;
+let SENSEPOOL=null;
+function sensePool(){
+  if(SENSEPOOL) return SENSEPOOL;
+  SENSEPOOL=[];
+  for(const x of DATA){ if(x.t==='代') continue; for(const s of sensesOf(x)) SENSEPOOL.push({...s,w:x.w,cat:catOf(x)}); }
+  return SENSEPOOL;
+}
+const catOf=x=>x.p.replace(/^敬語/,'').replace(/[・（].*$/,'');
+function choicesFor(r){
+  const mine=sensesOf(r), correct=mine[Math.floor(Math.random()*mine.length)];
+  const cat=catOf(r), all=sensePool();
+  const ok=s=>s.w!==r.w && !mine.some(m=>overlap(m,s));
+  const picked=[];
+  const tryAdd=s=>{ if(picked.length<3 && ok(s) && !picked.some(p=>overlap(p,s))) picked.push(s); };
+  shuffle(all.filter(s=>s.cat===cat)).forEach(tryAdd);
+  if(picked.length<3) shuffle(all.slice()).forEach(tryAdd);
+  return shuffle([{txt:correct.txt,ok:true},...picked.map(p=>({txt:p.txt,ok:false}))]);
+}
+function startQuiz(o){
+  focusMode();
+  quiz={...o,i:0,ok:0,combo:0,maxCombo:0,wrong:[],total:o.items.length*SEC*1000,locked:false,timeUp:false};
+  quiz.left=quiz.total; drawQ();
+  if(o.timed){let last=Date.now();timerId=setInterval(()=>{const now=Date.now();if(!quiz.locked)quiz.left-=now-last;last=now;drawTimer();if(quiz.left<=0){quiz.timeUp=true;endQuiz();}},100);}
+}
+function drawTimer(){
+  if(!quiz||!quiz.timed)return; const t=$('#tm'),b=$('#tb'); if(!t)return;
+  const s=Math.max(0,quiz.left/1000),warn=s<=Math.min(15,quiz.total/4000);
+  t.innerHTML=`${ICON.clock}${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`; t.classList.toggle('warn',warn);
+  b.style.width=(Math.max(0,quiz.left)/quiz.total*100)+'%'; b.parentNode.classList.toggle('warn',warn);
+}
+function drawQ(){
+  const q=quiz,r=q.items[q.i],opts=choicesFor(r);
+  app.innerHTML=`<div class="fbar"><button class="iconbtn" id="x" aria-label="やめる">${ICON.close}</button>
+    <div class="track${q.timed?'':' gold'}"><i id="tb" style="width:${q.timed?100:q.i/q.items.length*100}%"></i></div>
+    ${q.timed?'<span class="timer" id="tm"></span>':''}</div>
+  <div class="qtop"><span class="num">${esc(q.title)}　${q.i+1} / ${q.items.length}</span><span class="num">正解 ${q.ok}</span></div>
+  <div class="qcard"><div class="qm">${esc(metaOf(r))}${sensesOf(r).length>1?'　・意味の一つを選ぶ':''}</div><div class="qw">${esc(r.w)}</div>${r.k?`<div class="qk">〔${esc(r.k)}〕</div>`:''}${q.combo>=3?`<span class="combo">${q.combo}連続正解</span>`:''}</div>
+  <div class="choices">${opts.map((o,j)=>`<button class="choice" data-ok="${o.ok}"><span class="ck">${j+1}</span><span>${esc(o.txt)}</span></button>`).join('')}</div>`;
+  drawTimer();
+  $('#x').onclick=()=>{stopTimer();quiz=null;q.exit();};
+  $$('.choice').forEach(b=>b.onclick=()=>{
+    if(q.locked)return; q.locked=true; const ok=b.dataset.ok==='true';
+    $$('.choice').forEach(x=>{if(x.dataset.ok==='true'){x.classList.add('right');x.querySelector('.ck').innerHTML=ICON.check.replace('<svg','<svg width="16" height="16"');}else if(x!==b)x.classList.add('dim');});
+    if(ok){q.ok++;q.combo++;q.maxCombo=Math.max(q.maxCombo,q.combo);}else{b.classList.add('wrong');q.wrong.push(r);q.combo=0;}
+    mark(r,ok);
+    setTimeout(()=>{if(quiz!==q)return;q.i++;q.locked=false;if(q.i>=q.items.length)endQuiz();else drawQ();},ok?500:1400);
+  });
+}
+document.addEventListener('keydown',e=>{
+  if(e.target.matches('input,select'))return;
+  if(quiz&&!quiz.locked&&/^[1-4]$/.test(e.key)){const b=$$('.choice')[+e.key-1];if(b)b.click();}
+  if($('#fc')){if(e.key===' '){e.preventDefault();$('#fc').classList.toggle('flip');}if(e.key==='ArrowRight')cardGo(true);if(e.key==='ArrowLeft')cardGo(false);}
+});
+function endQuiz(){
+  stopTimer(); const q=quiz; quiz=null;
+  q.onFinish({ok:q.ok,total:q.items.length,wrong:q.wrong,timeUp:q.timeUp,unanswered:q.items.slice(q.i+(q.timeUp&&q.locked?1:0)),usedSec:Math.round((q.total-Math.max(0,q.left))/1000),timed:q.timed,maxCombo:q.maxCombo});
+}
+function showResult(res,o){
+  focusMode();
+  const pct=Math.round(res.ok/res.total*100),miss=[...res.wrong,...res.unanswered];
+  const color=o.clear===false?'var(--ng)':pct>=80?'var(--ok)':'var(--gold)';
+  const title=o.clear===undefined?(pct>=90?'すばらしい！':pct>=70?'よくできました':'もう少し！'):(o.clear?'クリア！':'もう一歩');
+  app.innerHTML=`<div class="fbar"><button class="iconbtn" id="x" aria-label="閉じる">${ICON.close}</button><div class="ft">${esc(o.title)}</div></div>
+  <div class="res">${o.clear!==undefined?`<div class="seal${o.clear?' ok':''}">${o.clear?'合格':'不合格'}</div>`:''}
+    <div class="ring">${ringSVG(pct/100,160,12,color,'var(--line)')}<div class="rv"><div><b class="num">${pct}<span style="font-size:20px">%</span></b><small>${res.ok} / ${res.total} 正解</small></div></div></div>
+    <h2>${title}</h2><p>${esc(o.note||'')}</p></div>
+  <div class="rstats"><div class="rstat"><div class="v num">${res.timed?fmtTime(res.usedSec):'—'}</div><div class="k">かかった時間${res.timeUp?'（切れ）':''}</div></div><div class="rstat"><div class="v num">${res.maxCombo}</div><div class="k">最大連続正解</div></div><div class="rstat"><div class="v num">${miss.length}</div><div class="k">間違い・未解答</div></div></div>
+  ${o.next?`<button class="btn gold" id="nx">${esc(o.nextLabel)}</button>`:''}
+  <div class="btnrow" style="margin-top:10px"><button class="btn" id="ag">もう一度</button>${miss.length?`<button class="btn" id="rv">間違いを復習</button>`:''}</div>
+  ${miss.length?`<div class="miss"><div class="mt">間違えた・解けなかった語</div>${miss.map(r=>`<div class="r"><span class="rw">${esc(r.w)}</span><span class="rm">${esc(r.m)}</span></div>`).join('')}</div>`:''}`;
+  $('#x').onclick=o.exit; $('#ag').onclick=o.again; if(o.next) $('#nx').onclick=o.next;
+  if(miss.length) $('#rv').onclick=()=>startCards(miss,{title:'間違いの復習',shuffle:false,forward:true,exit:o.exit,next:o.again,nextLabel:'テストに再挑戦'});
+}
+
+setTab('home');
+</script>
+
+</body></html>
